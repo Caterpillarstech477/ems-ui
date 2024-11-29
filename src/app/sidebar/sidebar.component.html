@@ -1,6 +1,6 @@
 <nav class="sidebar">
   <div class="sidebar-header">
-    <!-- <img src="logo.png" alt="Caterpillars Tech Logo" class="sidebar-logo" /> -->
+     <img src="assets/images/logo.png" alt="Caterpillars Tech Logo" class="sidebar-logo" />
     <h1 class="sidebar-title">CATERPILLARS TECH</h1>
   </div>
   <!-- Employee Management Dropdown -->
@@ -13,11 +13,11 @@
     </mat-icon>
   </div>
   <ul *ngIf="activeDropdown === 'employeeManagement'" class="submenu">
-    <li>
+    <!-- <li>
       <a routerLink="/add-employee" routerLinkActive="active">
         <mat-icon>person_add</mat-icon> Add Employee
       </a>
-    </li>
+    </li> -->
     <li>
       <a routerLink="/employee-benefit-reports" routerLinkActive="active">
         <mat-icon>bar_chart</mat-icon> Employee Benefit Reports
@@ -141,11 +141,11 @@
         <mat-icon>folder</mat-icon> Project Documentation
       </a>
     </li>
-    <li>
+    <!-- <li>
       <a routerLink="/project-budget" routerLinkActive="active">
         <mat-icon>attach_money</mat-icon> Project Budget
       </a>
-    </li>
+    </li> -->
   </ul>
 
   <!-- Asset Management -->
@@ -168,10 +168,32 @@
         <mat-icon>add_circle</mat-icon> Add Asset
       </a>
     </li>
-    <li>
+    <!-- <li>
       <a routerLink="/asset-assignment" routerLinkActive="active">
         <mat-icon>assignment_return</mat-icon> Asset Assignment
       </a>
+    </li> -->
+  </ul>
+  <!-- Alerts and Notifications -->
+  <div class="menu-item" (click)="toggleDropdown('alertsNotifications')">
+    <span>
+      <mat-icon>notifications</mat-icon> Alerts and Notifications
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'alertsNotifications'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'alertsNotifications'" class="submenu">
+    <li>
+      <a routerLink="/add-alerts-notifications" routerLinkActive="active">
+        <mat-icon>report</mat-icon> Alerts and Notifications Report
+      </a>
+    </li>
+    <li>
+      <a routerLink="/alerts-and-notification-report" routerLinkActive="active">
+        <mat-icon>add_alert</mat-icon> Add Alerts & Notifications
+      </a>
     </li>
   </ul>
+  
 </nav>

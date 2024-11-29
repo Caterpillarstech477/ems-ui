@@ -26,6 +26,9 @@ import { ProjectDocumentationComponent } from './projects/project-documentation/
 import { ProjectBudgetComponent } from './projects/project-budget/project-budget.component';
 import { AssetReportComponent } from './asset-management/asset-report/asset-report.component';
 import { AssetAssignmentComponent } from './asset-management/asset-assignment/asset-assignment.component';
+import { AlertsAndNotificationReportComponent } from './alerts-notifications/alerts-and-notification-report/alerts-and-notification-report.component';
+import { AddAlertsNotificationsComponent } from './alerts-notifications/add-alerts-notifications/add-alerts-notifications.component';
+import { AddAssetComponent } from './asset-management/add-asset/add-asset.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { AssetAssignmentComponent } from './asset-management/asset-assignment/as
     ProjectDocumentationComponent,
     ProjectBudgetComponent,
     AssetReportComponent,
-    AssetAssignmentComponent
+    AssetAssignmentComponent,
+    AlertsAndNotificationReportComponent,
+    AddAlertsNotificationsComponent,
+    AddAssetComponent
   ],
   imports: [
     BrowserModule,

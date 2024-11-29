@@ -26,7 +26,10 @@ import { ProjectBudgetComponent } from './projects/project-budget/project-budget
 // Asset Management
 import { AssetReportComponent } from './asset-management/asset-report/asset-report.component';
 import { AssetAssignmentComponent } from './asset-management/asset-assignment/asset-assignment.component';
-
+import { AddAssetComponent } from './asset-management/add-asset/add-asset.component';
+//alerts and notifications
+import { AddAlertsNotificationsComponent } from './alerts-notifications/add-alerts-notifications/add-alerts-notifications.component';
+import { AlertsAndNotificationReportComponent } from './alerts-notifications/alerts-and-notification-report/alerts-and-notification-report.component';
 
 const routes: Routes = [
   {
@@ -58,6 +61,10 @@ const routes: Routes = [
       // Asset Management Routes
       { path: 'asset-report', component: AssetReportComponent },
       { path: 'asset-assignment', component: AssetAssignmentComponent },
+      { path: 'add-asset', component: AddAssetComponent },
+      //alerts and notifications
+      { path: 'add-alerts-notifications', component: AddAlertsNotificationsComponent },
+      { path: 'alerts-and-notification-report', component: AlertsAndNotificationReportComponent },
     ],
   },
 
