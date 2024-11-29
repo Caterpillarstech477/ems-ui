@@ -1,0 +1,177 @@
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <!-- <img src="logo.png" alt="Caterpillars Tech Logo" class="sidebar-logo" /> -->
+    <h1 class="sidebar-title">CATERPILLARS TECH</h1>
+  </div>
+  <!-- Employee Management Dropdown -->
+  <div class="menu-item" (click)="toggleDropdown('employeeManagement')">
+    <span>
+      <mat-icon>group</mat-icon> Employee
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'employeeManagement'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'employeeManagement'" class="submenu">
+    <li>
+      <a routerLink="/add-employee" routerLinkActive="active">
+        <mat-icon>person_add</mat-icon> Add Employee
+      </a>
+    </li>
+    <li>
+      <a routerLink="/employee-benefit-reports" routerLinkActive="active">
+        <mat-icon>bar_chart</mat-icon> Employee Benefit Reports
+      </a>
+    </li>
+    <li>
+      <a routerLink="/add-employee-benefits" routerLinkActive="active">
+        <mat-icon>card_giftcard</mat-icon> Add Employee Benefits
+      </a>
+    </li>
+  </ul>
+
+  <!-- Attendance Dropdown -->
+  <div class="menu-item" (click)="toggleDropdown('attendance')">
+    <span>
+      <mat-icon>schedule</mat-icon> Attendance
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'attendance'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'attendance'" class="submenu">
+    <li>
+      <a routerLink="/attendance-reports" routerLinkActive="active">
+        <mat-icon>assignment</mat-icon> Attendance Reports
+      </a>
+    </li>
+    <li>
+      <a routerLink="/correction-requests" routerLinkActive="active">
+        <mat-icon>edit</mat-icon> Correction Requests
+      </a>
+    </li>
+  </ul>
+
+  <!-- Leave Management Dropdown -->
+  <div class="menu-item" (click)="toggleDropdown('leaveManagement')">
+    <span>
+      <mat-icon>description</mat-icon> Leave Management
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'leaveManagement'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'leaveManagement'" class="submenu">
+    <li>
+      <a routerLink="/leave-requests-report" routerLinkActive="active">
+        <mat-icon>report</mat-icon> Leave Requests Report
+      </a>
+    </li>
+    <li>
+      <a routerLink="/leave-balance-management" routerLinkActive="active">
+        <mat-icon>balance</mat-icon> Leave Balance Management
+      </a>
+    </li>
+    <li>
+      <a routerLink="/holiday-list" routerLinkActive="active">
+        <mat-icon>calendar_today</mat-icon> Holiday List
+      </a>
+    </li>
+  </ul>
+
+  <!-- HR Policies -->
+  <div class="menu-item" (click)="toggleDropdown('hrPolicies')">
+    <span>
+      <mat-icon>policy</mat-icon> HR Policies
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'hrPolicies'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'hrPolicies'" class="submenu">
+    <li>
+      <a routerLink="/compliance-legal-requirements" routerLinkActive="active">
+        <mat-icon>gavel</mat-icon> Compliance & Legal Requirements
+      </a>
+    </li>
+    <li>
+      <a routerLink="/labor-law" routerLinkActive="active">
+        <mat-icon>law</mat-icon> Labor Law
+      </a>
+    </li>
+    <li>
+      <a routerLink="/health-safety" routerLinkActive="active">
+        <mat-icon>medical_services</mat-icon> Health & Safety
+      </a>
+    </li>
+    <li>
+      <a routerLink="/contract-agreement" routerLinkActive="active">
+        <mat-icon>description</mat-icon> Contract & Agreement
+      </a>
+    </li>
+    <li>
+      <a routerLink="/employee-data-privacy-protection" routerLinkActive="active">
+        <mat-icon>security</mat-icon> Employee Data Privacy & Protection
+      </a>
+    </li>
+  </ul>
+
+  <!-- Projects -->
+  <div class="menu-item" (click)="toggleDropdown('projects')">
+    <span>
+      <mat-icon>work</mat-icon> Projects
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'projects'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'projects'" class="submenu">
+    <li>
+      <a routerLink="/project-report" routerLinkActive="active">
+        <mat-icon>article</mat-icon> Project Report
+      </a>
+    </li>
+    <li>
+      <a routerLink="/project-assignment" routerLinkActive="active">
+        <mat-icon>assignment_ind</mat-icon> Project Assignment
+      </a>
+    </li>
+    <li>
+      <a routerLink="/project-documentation" routerLinkActive="active">
+        <mat-icon>folder</mat-icon> Project Documentation
+      </a>
+    </li>
+    <li>
+      <a routerLink="/project-budget" routerLinkActive="active">
+        <mat-icon>attach_money</mat-icon> Project Budget
+      </a>
+    </li>
+  </ul>
+
+  <!-- Asset Management -->
+  <div class="menu-item" (click)="toggleDropdown('assetManagement')">
+    <span>
+      <mat-icon>inventory</mat-icon> Asset Management
+    </span>
+    <mat-icon class="dropdown-icon" [class.open]="activeDropdown === 'assetManagement'">
+      arrow_drop_down
+    </mat-icon>
+  </div>
+  <ul *ngIf="activeDropdown === 'assetManagement'" class="submenu">
+    <li>
+      <a routerLink="/asset-report" routerLinkActive="active">
+        <mat-icon>report_problem</mat-icon> Asset Report
+      </a>
+    </li>
+    <li>
+      <a routerLink="/add-asset" routerLinkActive="active">
+        <mat-icon>add_circle</mat-icon> Add Asset
+      </a>
+    </li>
+    <li>
+      <a routerLink="/asset-assignment" routerLinkActive="active">
+        <mat-icon>assignment_return</mat-icon> Asset Assignment
+      </a>
+    </li>
+  </ul>
+</nav>

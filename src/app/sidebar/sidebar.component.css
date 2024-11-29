@@ -1,0 +1,109 @@
+/* Sidebar Container */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #f4f6f9; /* Light grey background */
+  color: #11497a; /* Updated text color */
+  font-family: "Arial", sans-serif;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px; /* Space below the header */
+}
+
+.sidebar-logo {
+  width: 80px; /* Adjust logo size */
+  height: auto;
+  margin-bottom: 10px; /* Space between logo and title */
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 800;
+  color:  #11497a;; /* Matching text color */
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase; /* Capitalize text */
+}
+
+/* Menu Item */
+.menu-item {
+  cursor: pointer;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #11497a; /* Text color */
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #e8f0fc; /* Light blue hover background */
+  color: #94ab64; /* Updated hover color */
+}
+
+/* Dropdown Icon */
+.dropdown-icon {
+  margin-left: auto; /* Align dropdown icon to the right */
+  transition: transform 0.3s;
+}
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
+/* Submenu */
+.submenu {
+  list-style: none;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.submenu li {
+  padding: 8px 0;
+}
+
+.submenu li a {
+  text-decoration: none;
+  color: #11497a; /* Updated submenu text color */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+  font-weight: 600;
+}
+
+.submenu li a:hover {
+  color: #94ab64; /* Hover color for submenu */
+}
+
+/* Icon Styling */
+.menu-item mat-icon,
+.submenu a mat-icon {
+  font-size: 20px; /* Icon size */
+  margin-right: 10px; /* Space between icon and text */
+  color: #94ab64; /* Updated icon color */
+  vertical-align: middle; /* Align icons with text */
+}
+
+.menu-item:hover mat-icon,
+.submenu li a:hover mat-icon {
+  color: #94ab64; /* Icon hover color */
+}
+
+/* Active Menu Item */
+.menu-item.active {
+  background-color: #e8f0fc; /* Light blue background for active menu */
+  color: #94ab64; /* Active text color */
+}
+
+.menu-item.active mat-icon {
+  color: #94ab64; /* Active icon color */
+}

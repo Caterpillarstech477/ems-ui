@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    height: 100vh;
+  }
+  
+  app-sidebar {
+    flex-shrink: 0;
+    width: 250px; /* Ensures the sidebar width is consistent */
+  }
+  
+  div[style] {
+    flex-grow: 1;
+    overflow-y: auto; /* Allows scrolling for large content */
+  }
+  
