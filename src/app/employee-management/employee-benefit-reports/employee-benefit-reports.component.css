@@ -1,0 +1,161 @@
+.content-wrapper {
+  margin-left: 70px; /* Adjust to keep space for sidebar */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+  color: #94ab64;
+}
+
+button {
+  background-color: #7ca045;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the modal */
+  max-width: 70%; /* Adjust modal width */
+  margin-left: 0; /* Remove default margin */
+  padding-top: 10px;
+}
+
+.modal-content {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  padding: 0;
+}
+
+.modal-header {
+  padding: 12px;
+  display: flex;
+  justify-content: flex-start; /* Align heading to the left */
+  background-color: #f1f1f1;
+}
+
+.modal-header .modal-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #94ab64;
+}
+
+.modal-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: calc(75vh - 80px);
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 6px;
+  font-size: 12px;
+  border: 1px solid #cfcfcf; /* Set border color */
+  box-sizing: border-box;
+}
+
+label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #555555; /* Set label color */
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px;
+  padding: 8px 15px;
+  background-color: #f8f9fa;
+}
+
+.btn {
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border: none;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  border: none;
+}
+
+.modal-body .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-body .row > div {
+  padding-right: 10px;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.modal-body .col-md-6 {
+  width: 48%;
+}
+
+.modal-body .col-md-4 {
+  width: 48%;
+}
+
+.modal-body .row div {
+  flex-grow: 1;
+}
+
+.modal-body .form-control {
+  font-size: 12px;
+}
+
+.modal-header .close {
+  display: none; /* Hide the close icon */
+}
+.btn-danger {
+  background-color: #b91d1d;
+  border: none;
+}
+
+.btn-success {
+  background-color: #809f3d;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #073863;
+  border: none;
+}

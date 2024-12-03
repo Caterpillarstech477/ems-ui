@@ -1,1 +1,83 @@
-<p>leave-balance-management works!</p>
+<div class="content-wrapper">
+    <div class="header-and-filters">
+      <h1 class="main-heading">Leave Balance Management</h1>
+      <div class="filter-container">
+        <div class="filter-item">
+            <label for="dateRange">Date Range</label>
+            <mat-form-field class="date-range">
+              <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="dateRangePicker" placeholder="Select Date Range" [(ngModel)]="selectedDateRange">
+              <mat-datepicker #dateRangePicker startView="multi-year" selectionMode="range"></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+        <div class="filter-item">
+          <label for="leaveType">Leave Type</label>
+          <mat-form-field>
+            <mat-select [(ngModel)]="selectedLeaveType" placeholder="Annual Leave">
+              <mat-option *ngFor="let type of leaveTypes" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="filter-item">
+          <label for="export">Export</label>
+          <mat-form-field>
+            <mat-select [(ngModel)]="selectedExportOption" placeholder="PDF File">
+              <mat-option value="pdf">PDF File</mat-option>
+              <mat-option value="excel">Excel File</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Employee Name</th>
+            <th>Employee ID</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th>Pending Leaves</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of leaveRequests; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ request.employeeName }}</td>
+            <td>{{ request.employeeId }}</td>
+            <td>{{ request.department }}</td>
+            <td>{{ request.role }}</td>
+            <td>{{ request.pendingLeaves }}</td>
+            <td>
+              <div class="button-wrapper">
+                <button (click)="onView(request)" mat-icon-button class="btn-view">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <span class="button-text-view">View</span>
+              </div>
+              <div class="button-wrapper">
+                <button (click)="onEdit(request)" mat-icon-button class="btn-edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <span class="button-text-edit">Edit</span>
+              </div>
+              <div class="button-wrapper">
+                <button (click)="onDelete(request)" mat-icon-button class="btn-delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <span class="button-text-delete">Delete</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

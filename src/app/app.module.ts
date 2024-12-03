@@ -29,6 +29,16 @@ import { AssetAssignmentComponent } from './asset-management/asset-assignment/as
 import { AlertsAndNotificationReportComponent } from './alerts-notifications/alerts-and-notification-report/alerts-and-notification-report.component';
 import { AddAlertsNotificationsComponent } from './alerts-notifications/add-alerts-notifications/add-alerts-notifications.component';
 import { AddAssetComponent } from './asset-management/add-asset/add-asset.component';
+import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms'; 
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';  // Import ModalModule
+import { ToastrModule } from 'ngx-toastr';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -62,7 +72,18 @@ import { AddAssetComponent } from './asset-management/add-asset/add-asset.compon
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ModalModule.forRoot(),  
+    ToastrModule.forRoot(),
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
