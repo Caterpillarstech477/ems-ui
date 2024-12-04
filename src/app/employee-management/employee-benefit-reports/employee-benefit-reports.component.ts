@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EmployeeBenefitReportsComponent {
  modalRef :BsModalRef<any> | null = null;
- //addEmployeeForm :FormGroup;
  addEmployeeForm: FormGroup = this.fb.group({});
  isSubmitted = false;
  isModalOpen=false;

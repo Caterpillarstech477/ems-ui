@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //employee management
+import { EmployeeProfileManagementComponent } from './employee-management/employee-profile-management/employee-profile-management.component';
 import { AddEmployeeComponent } from './employee-management/add-employee/add-employee.component';
 import { EmployeeBenefitReportsComponent } from './employee-management/employee-benefit-reports/employee-benefit-reports.component';
 import { AddEmployeeBenefitsComponent } from './employee-management/add-employee-benefits/add-employee-benefits.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
    //component: IntegrateComponent, // Parent component
     children: [
       //employee-management
+      { path: 'employee-profile-management', component: EmployeeProfileManagementComponent },
       { path: 'add-employee', component: AddEmployeeComponent },
       { path: 'employee-benefit-reports', component: EmployeeBenefitReportsComponent },
       //attendence
