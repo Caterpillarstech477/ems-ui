@@ -34,43 +34,48 @@ import { AlertsAndNotificationReportComponent } from './alerts-notifications/ale
 //login
 import { LoginComponent } from './login/login.component';
 const routes: Routes = [
-  {
-    path: '',
-   //component: IntegrateComponent, // Parent component
-    children: [
-      //employee-management
-      { path: 'employee-profile-management', component: EmployeeProfileManagementComponent },
-      { path: 'add-employee', component: AddEmployeeComponent },
-      { path: 'employee-benefit-reports', component: EmployeeBenefitReportsComponent },
-      //attendence
-      { path: 'add-employee-benefits', component: AddEmployeeBenefitsComponent },
-      { path: 'attendance-reports', component: AttendanceReportsComponent },
-      { path: 'correction-requests', component: CorrectionRequestsComponent },
-      // Leave Management
-      { path: 'leave-requests-report', component: LeaveRequestsReportComponent },
-      { path: 'leave-balance-management', component: LeaveBalanceManagementComponent },
-      { path: 'holiday-list', component: HolidayListComponent },
-      // HR Policies 
-      { path: 'compliance-legal-requirements', component: ComplianceLegalRequirementsComponent },
-      { path: 'labor-law', component: LaborLawComponent },
-      { path: 'health-safety', component: HealthSafetyComponent },
-      { path: 'contract-agreement', component: ContractAgreementComponent },
-      { path: 'employee-data-privacy-protection', component: EmployeeDataPrivacyProtectionComponent },
-      // Projects 
-      { path: 'project-report', component: ProjectReportComponent },
-      { path: 'project-assignment', component: ProjectAssignmentComponent },
-      { path: 'project-documentation', component: ProjectDocumentationComponent },
-      { path: 'project-budget', component: ProjectBudgetComponent },
-      // Asset Management Routes
-      { path: 'asset-report', component: AssetReportComponent },
-      { path: 'asset-assignment', component: AssetAssignmentComponent },
-      { path: 'add-asset', component: AddAssetComponent },
-      //alerts and notifications
-      { path: 'add-alerts-notifications', component: AddAlertsNotificationsComponent },
-      { path: 'alerts-and-notification-report', component: AlertsAndNotificationReportComponent },
-    ],
-  },
+  // Default route (Login page)
+  { path: '', component: LoginComponent },
 
+  // Employee Management routes
+  { path: 'employee-profile-management', component: EmployeeProfileManagementComponent },
+  { path: 'add-employee', component: AddEmployeeComponent },
+  { path: 'employee-benefit-reports', component: EmployeeBenefitReportsComponent },
+  
+  // Attendance routes
+  { path: 'add-employee-benefits', component: AddEmployeeBenefitsComponent },
+  { path: 'attendance-reports', component: AttendanceReportsComponent },
+  { path: 'correction-requests', component: CorrectionRequestsComponent },
+
+  // Leave Management routes
+  { path: 'leave-requests-report', component: LeaveRequestsReportComponent },
+  { path: 'leave-balance-management', component: LeaveBalanceManagementComponent },
+  { path: 'holiday-list', component: HolidayListComponent },
+
+  // HR Policies routes
+  { path: 'compliance-legal-requirements', component: ComplianceLegalRequirementsComponent },
+  { path: 'labor-law', component: LaborLawComponent },
+  { path: 'health-safety', component: HealthSafetyComponent },
+  { path: 'contract-agreement', component: ContractAgreementComponent },
+  { path: 'employee-data-privacy-protection', component: EmployeeDataPrivacyProtectionComponent },
+
+  // Projects routes
+  { path: 'project-report', component: ProjectReportComponent },
+  { path: 'project-assignment', component: ProjectAssignmentComponent },
+  { path: 'project-documentation', component: ProjectDocumentationComponent },
+  { path: 'project-budget', component: ProjectBudgetComponent },
+
+  // Asset Management routes
+  { path: 'asset-report', component: AssetReportComponent },
+  { path: 'asset-assignment', component: AssetAssignmentComponent },
+  { path: 'add-asset', component: AddAssetComponent },
+
+  // Alerts and Notifications routes
+  { path: 'add-alerts-notifications', component: AddAlertsNotificationsComponent },
+  { path: 'alerts-and-notification-report', component: AlertsAndNotificationReportComponent },
+
+  // Wildcard route (in case of incorrect paths)
+  { path: '**', redirectTo: '' } // Default route to login page
 ];
 
 
