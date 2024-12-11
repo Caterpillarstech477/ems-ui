@@ -113,10 +113,12 @@ export class EmployeeProfileManagementComponent {
   }
 
   addEmployee() {
-    if (this.addEmployeeForm.valid) {
+    console.log('calling addEmployee', this.addEmployeeForm.value);
+    // if (this.addEmployeeForm.valid) {
       this.employees.push(this.addEmployeeForm.value);
+      console.log('this.employees', this.employees);
       this.closeCreateFormModal();
-    }
+    // }
   }
 
   updateEmployee() {

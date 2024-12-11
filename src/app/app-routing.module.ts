@@ -31,7 +31,8 @@ import { AddAssetComponent } from './asset-management/add-asset/add-asset.compon
 //alerts and notifications
 import { AddAlertsNotificationsComponent } from './alerts-notifications/add-alerts-notifications/add-alerts-notifications.component';
 import { AlertsAndNotificationReportComponent } from './alerts-notifications/alerts-and-notification-report/alerts-and-notification-report.component';
-
+//login
+import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {
     path: '',

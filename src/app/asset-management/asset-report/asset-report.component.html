@@ -1,1 +1,247 @@
-<p>asset-report works!</p>
+<div class="content-wrapper">
+  <div class="header-and-filters">
+    <h1 class="main-heading">ASSET REPORT</h1>
+    <button class="add-asset-btn" (click)="openCreateFormModal(AddAssetForm, 'add')">
+      Add Asset
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Asset Name</th>
+          <th>Asset Type</th>
+          <th>Asset Value</th>
+          <th>Assigned to</th>
+          <th>Asset Condition</th>
+          <th>Purchase Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asset of assets; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ asset.assetName }}</td>
+          <td>{{ asset.assetType }}</td>
+          <td>{{ asset.assetValue }}</td>
+          <td>{{ asset.assignedTo }}</td>
+          <td>{{ asset.assetCondition }}</td>
+          <td>{{ asset.purchasedDate }}</td>
+          <td>
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AddAssetForm, 'view', asset)"
+                mat-icon-button
+                color="primary"
+                class="btn-view"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <span class="button-text-view">View</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AddAssetForm, 'edit', asset)"
+                mat-icon-button
+                color="accent"
+                class="btn-edit"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <span class="button-text-edit">Edit</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="onDelete(asset)"
+                mat-icon-button
+                color="warn"
+                class="btn-delete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <span class="button-text-delete">Delete</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #AddAssetForm>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="assetForm"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateAsset() : addAsset()"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Asset' : isEditMode ? 'Edit Asset' : 'Add Asset' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Row 1 (Asset Name, Asset Type) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="asset_name">Asset Name</label>
+              <input
+                type="text"
+                formControlName="assetName"
+                id="asset_name"
+                class="form-control"
+                placeholder="Enter Asset Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="asset_type">Asset Type</label>
+              <input
+                type="text"
+                formControlName="assetType"
+                id="asset_type"
+                class="form-control"
+                placeholder="Enter Asset Type"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 2 (Asset Value, Assigned To) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="asset_value">Asset Value</label>
+              <input
+                type="text"
+                formControlName="assetValue"
+                id="asset_value"
+                class="form-control"
+                placeholder="Enter Asset Value"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="assigned_to">Assigned To</label>
+              <input
+                type="text"
+                formControlName="assignedTo"
+                id="assigned_to"
+                class="form-control"
+                placeholder="Enter Assigned To"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 3 (Location, Warranty Period) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="location">Location</label>
+              <input
+                type="text"
+                formControlName="location"
+                id="location"
+                class="form-control"
+                placeholder="Enter Location"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="warranty_period">Warranty Period</label>
+              <input
+                type="text"
+                formControlName="warrantyPeriod"
+                id="warranty_period"
+                class="form-control"
+                placeholder="Enter Warranty Period"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 4 (Asset Condition, Status) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="asset_condition">Asset Condition</label>
+              <input
+                type="text"
+                formControlName="assetCondition"
+                id="asset_condition"
+                class="form-control"
+                placeholder="Enter Asset Condition"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="status">Status</label>
+              <input
+                type="text"
+                formControlName="status"
+                id="status"
+                class="form-control"
+                placeholder="Enter Status"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 5 (Purchase Invoice, Purchased Date) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="purchase_invoice">Purchase Invoice</label>
+              <input
+                type="text"
+                formControlName="purchaseInvoice"
+                id="purchase_invoice"
+                class="form-control"
+                placeholder="Enter Purchase Invoice"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="purchased_date">Purchased Date</label>
+              <input
+                type="date"
+                formControlName="purchasedDate"
+                id="purchased_date"
+                class="form-control"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="closeCreateFormModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Asset' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
