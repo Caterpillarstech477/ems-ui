@@ -1,1 +1,229 @@
-<p>project-report works!</p>
+<div class="content-wrapper">
+    <div class="header-and-filters">
+      <h1 class="main-heading">PROJECT REPORT</h1>
+      <button class="add-project-btn" (click)="openCreateFormModal(projectFormModal, 'add')">
+        Add Project
+      </button>
+    </div>
+  
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Assigned Team</th>
+            <th>Assigned To</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ project.projectName }}</td>
+            <td>{{ project.description }}</td>
+            <td>{{ project.startDate }}</td>
+            <td>{{ project.endDate }}</td>
+            <td>{{ project.status }}</td>
+            <td>{{ project.assignedTeam }}</td>
+            <td>{{ project.assignedTo }}</td>
+            <td>{{ project.role }}</td>
+            <td>
+              <div class="button-wrapper">
+                <button
+                  (click)="openCreateFormModal(projectFormModal, 'view', project)"
+                  mat-icon-button
+                  color="primary"
+                  class="btn-view"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <span class="button-text-view">View</span>
+              </div>
+  
+              <div class="button-wrapper">
+                <button
+                  (click)="openCreateFormModal(projectFormModal, 'edit', project)"
+                  mat-icon-button
+                  color="accent"
+                  class="btn-edit"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <span class="button-text-edit">Edit</span>
+              </div>
+  
+              <div class="button-wrapper">
+                <button
+                  (click)="onDelete(project)"
+                  mat-icon-button
+                  color="warn"
+                  class="btn-delete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <span class="button-text-delete">Delete</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <ng-template #projectFormModal>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form
+          [formGroup]="projectForm"
+          novalidate
+          autocomplete="off"
+          (ngSubmit)="isEditMode ? updateProject() : addProject()"
+        >
+          <div class="modal-header">
+            <h4 class="modal-title">
+              {{ isViewMode ? 'View Project' : isEditMode ? 'Edit Project' : 'Add Project' }}
+            </h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeCreateFormModal()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Row 1 (Project Name, Description) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="project_name">Project Name</label>
+                <input
+                  type="text"
+                  formControlName="projectName"
+                  id="project_name"
+                  class="form-control"
+                  placeholder="Enter Project Name"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="description">Description</label>
+                <input
+                  type="text"
+                  formControlName="description"
+                  id="description"
+                  class="form-control"
+                  placeholder="Enter Description"
+                  [readonly]="isViewMode"
+                />
+              </div>
+            </div>
+  
+            <!-- Row 2 (Start Date, End Date) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="start_date">Start Date</label>
+                <input
+                  type="date"
+                  formControlName="startDate"
+                  id="start_date"
+                  class="form-control"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="end_date">End Date</label>
+                <input
+                  type="date"
+                  formControlName="endDate"
+                  id="end_date"
+                  class="form-control"
+                  [readonly]="isViewMode"
+                />
+              </div>
+            </div>
+  
+            <!-- Row 3 (Status, Assigned Team) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="status">Status</label>
+                <select
+                  id="status"
+                  class="form-control"
+                  formControlName="status"
+                  [disabled]="isViewMode"
+                >
+                  <option value="ongoing">Ongoing</option>
+                  <option value="completed">Completed</option>
+                  <option value="onhold">On Hold</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="assigned_team">Assigned Team</label>
+                <input
+                  type="text"
+                  formControlName="assignedTeam"
+                  id="assigned_team"
+                  class="form-control"
+                  placeholder="Enter Assigned Team"
+                  [readonly]="isViewMode"
+                />
+              </div>
+            </div>
+  
+            <!-- Row 4 (Assigned To, Role) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="assigned_to">Assigned To</label>
+                <input
+                  type="text"
+                  formControlName="assignedTo"
+                  id="assigned_to"
+                  class="form-control"
+                  placeholder="Enter Assigned To"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="role">Role</label>
+                <select
+                  id="role"
+                  class="form-control"
+                  formControlName="role"
+                  [disabled]="isViewMode"
+                >
+                  <option value="developer">Developer</option>
+                  <option value="manager">Manager</option>
+                  <option value="tester">Tester</option>
+                </select>
+              </div>
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="closeCreateFormModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success"
+              *ngIf="!isViewMode"
+            >
+              {{ isEditMode ? 'Save Changes' : 'Add Project' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+  

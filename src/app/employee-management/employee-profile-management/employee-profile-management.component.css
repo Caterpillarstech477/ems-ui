@@ -1,10 +1,11 @@
-.content-wrapper{
+.content-wrapper {
     margin-left: 60px;
     padding: 20px;
     box-sizing: border-box;
   }
   
-  .add-project-btn {
+  
+  .add-employee-btn {
     background-color: #7ca045;
     color: white;
     font-weight: bold;
@@ -115,7 +116,7 @@
     margin-top: 5px;
   }
   
-  /* Add project form styles */
+  /* add employee form styles */
   .row {
     display: flex;
     justify-content: space-between;
@@ -207,12 +208,12 @@
   }
   
   .btn-danger {
-    background-color: #b91d1d;
+    background-color: #d9534f;
     border: none;
   }
   
   .btn-success {
-    background-color:#809f3d;
+    background-color: #5cb85c;
     border: none;
   }
   
@@ -266,3 +267,4 @@
     background-color: #073863;
     border: none;
   }
+  

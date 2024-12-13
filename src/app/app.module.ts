@@ -39,6 +39,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
+import { EmployeeProfileManagementComponent } from './employee-management/employee-profile-management/employee-profile-management.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     AssetAssignmentComponent,
     AlertsAndNotificationReportComponent,
     AddAlertsNotificationsComponent,
-    AddAssetComponent
+    AddAssetComponent,
+    EmployeeProfileManagementComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

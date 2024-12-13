@@ -1,1 +1,73 @@
-<p>project-documentation works!</p>
+<div class="content-wrapper">
+    <h2 class="main-heading">Project Documentation</h2>
+  
+    <form [formGroup]="documentForm" novalidate autocomplete="off" (ngSubmit)="onSubmit()">
+      <div class="modal-body">
+        <!-- Row 1 (Project Name, Document Name) -->
+        <div class="row">
+          <div class="col-md-6">
+            <label for="projectName">Project Name</label>
+            <input type="text" formControlName="projectName" id="projectName" class="form-control" placeholder="Enter Project Name" />
+          </div>
+          <div class="col-md-6">
+            <label for="documentName">Document Name</label>
+            <input type="text" formControlName="documentName" id="documentName" class="form-control" placeholder="Enter Document Name" />
+          </div>
+        </div>
+  
+        <!-- Row 2 (Document Type, Upload File) -->
+        <div class="row">
+          <div class="col-md-6">
+            <label for="documentType">Document Type</label>
+            <select formControlName="documentType" id="documentType" class="form-control">
+              <option value="pdf">PDF</option>
+              <option value="docx">DOCX</option>
+              <option value="xls">XLS</option>
+              <option value="ppt">PPT</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="uploadFile">Upload File</label>
+            <input type="file" formControlName="uploadFile" id="uploadFile" class="form-control" />
+          </div>
+        </div>
+  
+        <!-- Row 3 (Uploaded By, Uploaded Date) -->
+        <div class="row">
+          <div class="col-md-6">
+            <label for="uploadedBy">Uploaded By</label>
+            <input type="text" formControlName="uploadedBy" id="uploadedBy" class="form-control" placeholder="Enter Uploaded By" />
+          </div>
+          <div class="col-md-6">
+            <label for="uploadedDate">Uploaded Date</label>
+            <input type="date" formControlName="uploadedDate" id="uploadedDate" class="form-control" />
+          </div>
+        </div>
+  
+        <!-- Row 4 (Document Version, Status) -->
+        <div class="row">
+          <div class="col-md-6">
+            <label for="documentVersion">Document Version</label>
+            <input type="text" formControlName="documentVersion" id="documentVersion" class="form-control" placeholder="Enter Document Version" />
+          </div>
+          <div class="col-md-6">
+            <label for="status">Status</label>
+            <select formControlName="status" id="status" class="form-control">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="add-more" (click)="addMore()">Add More</button>
+        <button type="submit" class="save-and-exit ">Save and Exit</button>
+        
+        
+        
+      </div>
+    </form>
+  </div>

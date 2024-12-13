@@ -1,0 +1,349 @@
+<div class="content-wrapper">
+  <div class="header-and-filters">
+    <h1 class="main-heading">Employee Profile Management</h1>
+    <button class="add-employee-btn" (click)="openCreateFormModal(AddEmployeeForm, 'add')">
+      Add Employee
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Employee Name</th>
+          <th>Designation</th>
+          <th>Phone Number</th>
+          <th>Mail ID</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ employee.first_name + ' ' + employee.last_name }}</td>
+          <td>{{ employee.job_title }}</td>
+          <td>{{ employee.mobile_number }}</td>
+          <td>{{ employee.email }}</td>
+          <td>
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AddEmployeeForm, 'view', employee)"
+                mat-icon-button
+                color="primary"
+                class="btn-view"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <span class="button-text-view">View</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AddEmployeeForm, 'edit', employee)"
+                mat-icon-button
+                color="accent"
+                class="btn-edit"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <span class="button-text-edit">Edit</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="onDelete(employee)"
+                mat-icon-button
+                color="warn"
+                class="btn-delete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <span class="button-text-delete">Delete</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #AddEmployeeForm>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="addEmployeeForm"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateEmployee() : addEmployee()"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Employee' : isEditMode ? 'Edit Employee' : 'Add Employee' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Row 1 (First Name, Last Name) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="first_name">First Name</label>
+              <input
+                type="text"
+                formControlName="first_name"
+                id="first_name"
+                class="form-control"
+                placeholder="Enter First Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="last_name">Last Name</label>
+              <input
+                type="text"
+                formControlName="last_name"
+                id="last_name"
+                class="form-control"
+                placeholder="Enter Last Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 2 (Gender, Date of Birth) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="gender">Gender</label>
+              <select
+                formControlName="gender"
+                id="gender"
+                class="form-control"
+                [disabled]="isViewMode"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="dob">Date of Birth</label>
+              <input
+                type="date"
+                formControlName="dob"
+                id="dob"
+                class="form-control"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 3 (Mobile Number, Email Address) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="mobile_number">Mobile Number</label>
+              <input
+                type="text"
+                formControlName="mobile_number"
+                id="mobile_number"
+                class="form-control"
+                placeholder="Enter Mobile Number"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                formControlName="email"
+                id="email"
+                class="form-control"
+                placeholder="Enter Email Address"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 4 (Emergency Number, Address) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="emergency_number">Emergency Number</label>
+              <input
+                type="text"
+                formControlName="emergency_number"
+                id="emergency_number"
+                class="form-control"
+                placeholder="Enter Emergency Number"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="address">Address</label>
+              <input
+                type="text"
+                formControlName="address"
+                id="address"
+                class="form-control"
+                placeholder="Enter Address"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 5 (City, State, Postal Code) -->
+          <div class="row">
+            <div class="col-md-4">
+              <label for="city">City</label>
+              <input
+                type="text"
+                formControlName="city"
+                id="city"
+                class="form-control"
+                placeholder="Enter City"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="state">State</label>
+              <input
+                type="text"
+                formControlName="state"
+                id="state"
+                class="form-control"
+                placeholder="Enter State"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="postal_code">Postal Code</label>
+              <input
+                type="text"
+                formControlName="postal_code"
+                id="postal_code"
+                class="form-control"
+                placeholder="Enter Postal Code"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 6 (Country, Job Title, NI Number) -->
+          <div class="row">
+            <div class="col-md-4">
+              <label for="country">Country</label>
+              <input
+                type="text"
+                formControlName="country"
+                id="country"
+                class="form-control"
+                placeholder="Enter Country"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="job_title">Job Title</label>
+              <input
+                type="text"
+                formControlName="job_title"
+                id="job_title"
+                class="form-control"
+                placeholder="Enter Job Title"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="ni_number">NI Number</label>
+              <input
+                type="text"
+                formControlName="ni_number"
+                id="ni_number"
+                class="form-control"
+                placeholder="Enter NI Number"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 7 (Employment Type, Salary) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="employment_type">Employment Type</label>
+              <select
+                formControlName="employment_type"
+                id="employment_type"
+                class="form-control"
+                [disabled]="isViewMode"
+              >
+                <option value="">Select Employment Type</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Contract">Contract</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="salary">Salary</label>
+              <input
+                type="text"
+                formControlName="salary"
+                id="salary"
+                class="form-control"
+                placeholder="Enter Salary"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 8 (Employment Status, Hiring Date) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="employment_status">Employment Status</label>
+              <select
+                formControlName="employment_status"
+                id="employment_status"
+                class="form-control"
+                [disabled]="isViewMode"
+              >
+                <option value="">Select Employment Status</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="hiring_date">Hiring Date</label>
+              <input
+                type="date"
+                formControlName="hiring_date"
+                id="hiring_date"
+                class="form-control"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="closeCreateFormModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Employee' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
