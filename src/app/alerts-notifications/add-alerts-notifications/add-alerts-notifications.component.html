@@ -1,1 +1,110 @@
-<p>add-alerts-notifications works!</p>
+
+<div class="content-wrapper">
+    <div class="header-and-filters">
+      <h1 class="main-heading">ADD ALERTS & NOTIFICATIONS</h1>
+    </div>
+  <div class="container">
+    <div class="form-container">
+        <form #alertForm="ngForm" (ngSubmit)="onSubmit(alertForm)">
+          <!-- Alert Type -->
+         
+          <div class="form-group">
+            <div class="form-field">
+            <label for="alertType">Alert Type</label>
+            <select id="alertType" name="alertType" [(ngModel)]="alertData.alertType" required>
+              <option value="" disabled selected>Select Type</option>
+              <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="alertMessage">Alert Message</label>
+            <select id="alertMessage" name="alertMessage" [(ngModel)]="alertData.alertMessage" required>
+              <option value="" disabled selected>Select Type</option>
+              <option *ngFor="let Message of alertMessages" [value]="Message">{{ Message }}</option>
+            </select>
+          </div>
+         
+       
+          
+          <!-- Alert Message
+          <div class="form-group">
+            <label for="alertMessage">Alert Message</label>
+            <input type="text" id="alertMessage" name="alertMessage"
+              [(ngModel)]="alertData.alertMessage"
+              required/>
+          </div> -->
+      
+          <!-- Employee Name -->
+          <div class="form-field">
+            <label for="employeeName">Employee Name</label>
+            <select id="employeeName" name="employeeName" [(ngModel)]="alertData.employeeName" required>
+              <option value="" disabled selected>Select Type</option>
+              <option *ngFor="let Name of employeeNames" [value]="Name">{{ Name }}</option>
+            </select>
+          </div>
+          
+          <!-- <div class="form-group">
+            <label for="employeeName">Employee Name</label>
+            <input
+              type="text"
+              id="employeeName"
+              name="employeeName"
+              [(ngModel)]="alertData.employeeName"
+              required
+            />
+          </div> -->
+      
+          <!-- Is Read -->
+          
+          <div class="form-field">
+            <label for="isRead">Is Read?</label>
+            <select id="isRead" name="isRead" [(ngModel)]="alertData.isRead" required>
+              <option value="" disabled selected>Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+      
+          <!-- Priority Level -->
+          <div class="form-field">
+            <label for="priorityLevel">Priority Level</label>
+            <select id="priorityLevel" name="priorityLevel" [(ngModel)]="alertData.priorityLevel" required>
+              <option value="" disabled selected>Select Type</option>
+              <option *ngFor="let priority of priorityLevels" [value]="priority">{{ priority }}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <label for="priorityLevel">Priority Level</label>
+            <input type="text" id="priorityLevel" name="priorityLevel"
+              [(ngModel)]="alertData.priorityLevel"
+              required
+            />
+          </div> -->
+      
+          <!-- Expires At -->
+          <div class="form-field">
+            <label for="expiresAt">Expires At</label>
+            <input
+              type="datetime-local"
+              id="expiresAt"
+              name="expiresAt"
+              [(ngModel)]="alertData.expiresAt"
+              required
+            />
+          </div>
+          </div>
+       
+      
+          <!-- Buttons -->
+          <div class="button-group">
+            <button type="button" (click)="addMore()" class="btnAdd">Add More</button>
+            <button type="submit" class="btnSave">Save and Exit</button>
+          </div>
+        
+      </form>
+   
+      </div>
+    </div>
+      
+  
+

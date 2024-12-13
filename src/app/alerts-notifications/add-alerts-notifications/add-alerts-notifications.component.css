@@ -1,0 +1,146 @@
+.content-wrapper {
+    margin-left: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.container{
+    margin-left: 40px;
+    border: 1px solid #cfcfcf;
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 10px;
+    box-shadow: none;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    width: 800px;
+    text-align: left;
+    justify-content: space-between;
+    box-sizing: border-box;
+    
+}
+
+
+/* .form-container {
+    margin-left: 40px;
+    padding: 20px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border-radius: 10px;
+} */
+.form-group{
+    /* padding: 5px; */
+    display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 10px;
+}
+.form-group .form-field {
+    width: 48%;
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+
+.form-group input{
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .form-group select{
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .button-group {
+    display: flex; /* Aligns buttons horizontally */
+    gap: 60px; /* Adds space between buttons */
+    justify-content: center; /* Centers the buttons horizontally */
+    margin-top: 20px; /* Adds space above the button group */
+    
+  }
+  
+  .button-group button {
+    padding: 10px 20px; /* Increases the clickable area */
+    font-size: 16px; /* Adjusts the font size for readability */
+    border: none; /* Removes default button border */
+    border-radius: 10px; /* Adds rounded corners */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Adds a hover effect */
+  }
+  
+  .button-group .btnAdd {
+    background-color: #809f3d; /* Green background */
+    color: white; /* White text */
+  }
+  
+  .button-group .btnAdd:hover {
+    background-color: #40660b;; /* Darker green on hover */
+  }
+  
+  .button-group .btnSave {
+    background-color:brown; 
+    color: white; /* White text */
+  }
+  
+  .button-group .btnSave:hover {
+    background-color: #602008; /* Darker blue on hover */
+  }
+  
+.header-and-filters {
+    display: flex;
+    justify-content: space-between; /* Distributes space between items */
+    align-items: center;           /* Vertically centers items */
+    margin-bottom: 20px;           /* Adds space below the row */
+  }
+
+.main-heading {
+    font-size: 24px;
+    color: #7ca045;
+    font-weight: 500;
+    margin-left: 40px;
+    flex: 1;
+}
+
+button[mat-icon-button] {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    margin: 0 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+}
+
+button[mat-icon-button] mat-icon {
+    color: white;
+    font-size: 18px;
+}
+
+button[mat-icon-button]:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.button-wrapper {
+    display: inline-block;
+    text-align: center;
+    margin-right: 8px;
+}
+
