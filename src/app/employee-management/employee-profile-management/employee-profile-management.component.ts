@@ -2,6 +2,8 @@ import { Component, TemplateRef } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Employee } from './model/employee.model'; // Adjust path as needed
 
 @Component({
   selector: 'app-employee-profile-management',
@@ -9,30 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./employee-profile-management.component.css']
 })
 export class EmployeeProfileManagementComponent {
-  employees = [
+  private EMPLOYEE_REST_API_URL = 'http://localhost:8080/api/employees';  // URL to REST api
+  employees: Employee[] = []; // Array of Employee objects
     // Hardcoded employee data (you can add more)
-    {
-      first_name: 'Ravi',
-      last_name: 'Kumar',
-      gender: 'Male',
-      dob: '1985-06-15',
-      mobile_number: '9988776655',
-      email: 'info@caterpillarstech.com',
-      emergency_number: '9988776655',
-      address: '123 Main St, City',
-      city: 'Chennai',
-      state: 'Tamil Nadu',
-      postal_code: '600001',
-      country: 'India',
-      job_title: 'Manager',
-      ni_number: 'NI123456',
-      salary: '60000',
-      employment_type: 'Full-time',
-      employment_status: 'Active',
-      hiring_date: '2010-03-25'
-    }
+  
     // Add more employees here if needed
-  ];
 
   modalRef: BsModalRef | null = null;
   addEmployeeForm: FormGroup = this.fb.group({});
@@ -47,7 +30,11 @@ export class EmployeeProfileManagementComponent {
     class: 'modal-md'
   };
 
-  constructor(private modalService: BsModalService, private fb: FormBuilder) {}
+  constructor(
+    private modalService: BsModalService,
+    private fb: FormBuilder,
+    private httpClient: HttpClient
+  ) {}
 
   ngOnInit() {
     this.initEmployeeForm();
@@ -55,13 +42,24 @@ export class EmployeeProfileManagementComponent {
 
   initEmployeeForm() {
     this.addEmployeeForm = this.fb.group({
+
+      // {
+      //   "first_name" : "Satya Kumar",
+      //   "last_name" : "Kota",
+      //   "gender" : "Femal",
+      //   "date_of_birth" : "1993-06-12",
+      //   "email" : "kotasunilkumar3@gmail.com",
+      //   "phone_number" : "9493692077",
+      //   "hire_dateStr" : "1993-06-12"
+      // }
+
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
       gender: ['', [Validators.required]],
-      dob: ['', [Validators.required]],
-      mobile_number: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      date_of_birth: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      emergency_number: ['', [Validators.pattern('^[0-9]*$')]],
+      phone_number: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      emergency_phone: ['', [Validators.pattern('^[0-9]*$')]],
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
@@ -72,7 +70,7 @@ export class EmployeeProfileManagementComponent {
       salary: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       employment_type: ['', [Validators.required]],
       employment_status: ['', [Validators.required]],
-      hiring_date: ['', [Validators.required]]
+      hire_dateStr: ['', [Validators.required]]
     });
   }
 
@@ -114,8 +112,18 @@ export class EmployeeProfileManagementComponent {
 
   addEmployee() {
     console.log('calling addEmployee', this.addEmployeeForm.value);
-    // if (this.addEmployeeForm.valid) {
-      this.employees.push(this.addEmployeeForm.value);
+
+    const employee: Employee = this.addEmployeeForm.value as Employee;
+    console.log('Form Submitted and converted into employee object', employee);
+
+    this.httpClient
+    .post<Employee>(this.EMPLOYEE_REST_API_URL, employee)
+    .subscribe(response => {
+         console.log('Employee saved successfully', response);
+         this.employees.push(response);
+    });
+
+      
       console.log('this.employees', this.employees);
       this.closeCreateFormModal();
     // }

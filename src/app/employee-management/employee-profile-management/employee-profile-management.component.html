@@ -23,7 +23,7 @@
           <td>{{ i + 1 }}</td>
           <td>{{ employee.first_name + ' ' + employee.last_name }}</td>
           <td>{{ employee.job_title }}</td>
-          <td>{{ employee.mobile_number }}</td>
+          <td>{{ employee.phone_number }}</td>
           <td>{{ employee.email }}</td>
           <td>
             <div class="button-wrapper">
@@ -134,11 +134,11 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label for="dob">Date of Birth</label>
+              <label for="date_of_birth">Date of Birth</label>
               <input
                 type="date"
-                formControlName="dob"
-                id="dob"
+                formControlName="date_of_birth"
+                id="date_of_birth"
                 class="form-control"
                 [readonly]="isViewMode"
               />
@@ -148,11 +148,11 @@
           <!-- Row 3 (Mobile Number, Email Address) -->
           <div class="row">
             <div class="col-md-6">
-              <label for="mobile_number">Mobile Number</label>
+              <label for="phone_number">Phone Number</label>
               <input
                 type="text"
-                formControlName="mobile_number"
-                id="mobile_number"
+                formControlName="phone_number"
+                id="phone_number"
                 class="form-control"
                 placeholder="Enter Mobile Number"
                 [readonly]="isViewMode"
@@ -174,13 +174,13 @@
           <!-- Row 4 (Emergency Number, Address) -->
           <div class="row">
             <div class="col-md-6">
-              <label for="emergency_number">Emergency Number</label>
+              <label for="emergency_phone">Emergency Number</label>
               <input
                 type="text"
-                formControlName="emergency_number"
-                id="emergency_number"
+                formControlName="emergency_phone"
+                id="emergency_phone"
                 class="form-control"
-                placeholder="Enter Emergency Number"
+                placeholder="Enter Emergency Phone"
                 [readonly]="isViewMode"
               />
             </div>
@@ -315,11 +315,11 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label for="hiring_date">Hiring Date</label>
+              <label for="hire_dateStr">Hiring Date</label>
               <input
                 type="date"
-                formControlName="hiring_date"
-                id="hiring_date"
+                formControlName="hire_dateStr"
+                id="hire_dateStr"
                 class="form-control"
                 [readonly]="isViewMode"
               />
