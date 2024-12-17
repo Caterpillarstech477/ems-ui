@@ -1,1 +1,134 @@
-<p>alerts-and-notification-report works!</p>
+<div class="content-wrapper">
+  <div class="header-and-filters">
+    <h1 class="main-heading">Alerts & Notification Report</h1>
+    <div class="filter-group">
+      <button class="add-alert-btn">ADD ALERT</button>
+
+      <div class="filter-item">
+        <div class="date-range">
+          <label for="start-date">Date Range</label>
+        <input type="text" id="start-date" placeholder="Start Date"
+        [(ngModel)]="startDate" ngbDatepicker #startDatePicker="ngbDatepicker"
+        (click)="startDatePicker.toggle()" readonly />
+        <input type="text" id="end-date" placeholder="End Date"
+        [(ngModel)]="endDate" ngbDatepicker #endDatePicker="ngbDatepicker"
+        (click)="endDatePicker.toggle()" readonly/>
+        </div>
+        
+      </div>
+    
+      <div class="filter-item">
+        <label for="alert-type">Alert Type</label>
+        <select id="alert-type" [(ngModel)]="selectedAlertType">
+        <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+        
+      <div class="filter-item">
+        <label for="export-type">Export Type</label>
+        <select id="export-type" [(ngModel)]="selectedExportType">
+        <option *ngFor="let type of exportTypes" [value]="type">{{ type }}</option>
+        </select> 
+      </div>
+    </div>
+  </div>
+
+
+    <!-- <div class="header-and-filters"> -->
+      <!-- <h1 class="main-heading">Alert & Notiication Report</h1>
+      <button class="add-alert-btn">ADD ALERT</button>
+
+
+      <div class="filter-group">
+        <div class="filter-item">
+          <label for="dateRange">Date Range</label>
+          <mat-form-field class="date-range">
+            <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
+            <input matInput [matDatepicker]="dateRangePicker" placeholder="Start Date" [(ngModel)]="startDate">
+            <mat-datepicker #dateRangePicker startView="multi-year" selectionMode="range"></mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
+            <input matInput [matDatepicker]="dateRangePicker" placeholder="End Date" [(ngModel)]="startDate">
+            <mat-datepicker #dateRangePicker startView="multi-year" selectionMode="range"></mat-datepicker>
+          </mat-form-field>
+        </div>
+  
+        <div class="wrap">
+        <label for="date-range">Date Range</label>
+          <input type="date" placeholder="Start Date" [(ngModel)]="startDate" />
+          <input type="date" placeholder="End Date" [(ngModel)]="endDate" />
+        </div>
+        
+      </div>
+
+      <div class="filter-group"> 
+        <div class="wrap">
+          <label for="alert-type">Alert Type</label>
+        <select id="alert-type" [(ngModel)]="selectedAlertType">
+          <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
+        </select>
+        </div>
+        
+      </div>
+
+      <div class="filter-group"> 
+        <div class="wrap">
+          <label for="alert-type">Export Type</label>
+        <select id="alert-type" [(ngModel)]="selectedExportType">
+          <option *ngFor="let type of exportTypes" [value]="type">{{ type }}</option>
+        </select>
+        </div>
+      </div> -->
+
+    <!-- </div> -->
+  
+  <div class="table-container">
+    <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Alert Type</th>
+            <th>Alert Message</th>
+            <th>Employee Name</th>
+            <th>Is Read</th>
+            <th>Priority Level</th>
+            <th>Expires At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alert of alerts; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ alert.type }}</td>
+            <td>{{ alert.message }}</td>
+            <td>{{ alert.employeeName }}</td>
+            <td>{{ alert.isRead}}</td>
+            <td>{{ alert.priorityLevel }}</td>
+            <td>{{ alert.expireAt }}</td>
+            <td>
+              <div class="button-wrapper">
+                <button (click)="onView(alert)" mat-icon-button color="primary" class="btn-view">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <span class="button-text-view">View</span>
+              </div>
+  
+              <div class="button-wrapper">
+                <button (click)="onEdit(alert)" mat-icon-button color="accent" class="btn-edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <span class="button-text-edit">Edit</span>
+              </div>
+  
+              <div class="button-wrapper">
+                <button (click)="onDelete(alert)" mat-icon-button color="warn" class="btn-delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <span class="button-text-delete">Delete</span>
+              </div>
+            </td> 
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
+  
