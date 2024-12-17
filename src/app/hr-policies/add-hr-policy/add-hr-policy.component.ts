@@ -2,24 +2,22 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-employee-benefits',
-  templateUrl: './add-employee-benefits.component.html',
-  styleUrls: ['./add-employee-benefits.component.css']
+  selector: 'app-add-hr-policy',
+  templateUrl: './add-hr-policy.component.html',
+  styleUrls: ['./add-hr-policy.component.css']
 })
-export class AddEmployeeBenefitsComponent {
+export class AddHrPolicyComponent {
   documentForm!: FormGroup;
   
     constructor(private fb: FormBuilder) {}
   
     ngOnInit(): void {
       this.documentForm = this.fb.group({
-        benifit_name: ['', Validators.required],
-        benifit_type: ['', Validators.required],
+        policy_type: ['', Validators.required],
+        policy_name: ['', Validators.required],
         description: ['', Validators.required],
-        eligible_criteria: [null, Validators.required],
-        start_date: ['', Validators.required],
-        end_date: ['', Validators.required],
-        upload_document: ['', Validators.required],
+        expires_at: [null, Validators.required],
+        uploaded_by: ['', Validators.required],
         
       });
     }
@@ -50,5 +48,7 @@ export class AddEmployeeBenefitsComponent {
       console.log('Form cleared for adding more entries');
     }
     
+      }
+  
 
-}
+

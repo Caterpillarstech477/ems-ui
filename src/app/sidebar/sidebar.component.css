@@ -1,6 +1,6 @@
 /* Sidebar Container */
 .sidebar {
-  width: 300px;
+  width: 250px;
   height: 100vh;
   background-color: #f4f6f9; /* Light grey background */
   color: #11497a; /* Updated text color */
@@ -38,7 +38,7 @@
   padding: 12px 15px;
   display: flex;
   align-items: center;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 600;
   color: #11497a; /* Text color */
   border-radius: 8px;

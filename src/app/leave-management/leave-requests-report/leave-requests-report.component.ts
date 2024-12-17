@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,TemplateRef } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-leave-requests-report',
@@ -7,74 +11,134 @@ import { Component } from '@angular/core';
 })
 export class LeaveRequestsReportComponent {
   
-  leaveRequests = [
-    { 
-      sno: 1, 
-      employeeName: 'Ravi', 
-      employeeId: '09761', 
-      department: 'Design', 
-      role: 'Manager', 
-      leaveType: 'Medical', 
-      status: 'Approved' 
-    },
-    { 
-      sno: 2, 
-      employeeName: 'Hari', 
-      employeeId: '098754', 
-      department: 'Development', 
-      role: 'HR', 
-      leaveType: 'Casual', 
-      status: 'Approved' 
-    },
-    { 
-      sno: 3, 
-      employeeName: 'Pavan', 
-      employeeId: '097524', 
-      department: 'Marketing', 
-      role: 'Developer', 
-      leaveType: 'Medical', 
-      status: 'Pending' 
-    },
-    { 
-      sno: 4, 
-      employeeName: 'Venkat', 
-      employeeId: '09786', 
-      department: 'Accounts', 
-      role: 'Designer', 
-      leaveType: 'Emergency', 
-      status: 'Approved' 
-    },
-    { 
-      sno: 5, 
-      employeeName: 'Purna', 
-      employeeId: '0988990', 
-      department: 'Development', 
-      role: 'Accountant', 
-      leaveType: 'Medical', 
-      status: 'Pending' 
-    },
-  ];
-  leaveTypes: string[] = ['Sick Leave', 'Casual Leave', 'Maternity Leave', 'Annual Leave']; // Example leave types
-  selectedDateRange: Date[] = [];
-  selectedLeaveType: string = '';  
-  selectedExportOption: string = 'pdf';
-  onView(request: any): void {
-    console.log('View clicked:', request); 
-  }
-
-  onEdit(request: any): void {
-    console.log('Edit clicked:', request);
-  }
-
-  onDelete(request: any): void {
-    console.log('Delete clicked:', request);
-  }
-  onExport() {
-    if (this.selectedExportOption === 'pdf') {
-      console.log('Exporting as PDF');
-    } else if (this.selectedExportOption === 'excel') {
-      console.log('Exporting as Excel');
+  employees = [
+     {
+       employee_name:'Gayathri',
+       employee_id: '121',
+       department:'Design',
+       role:'Developer',
+       leave_type:'Casual',
+       status:'Approved'
+       
+     },
+     {
+      employee_name:'Kushal',
+      employee_id: '121',
+      department:'Design',
+      role:'Intern',
+      leave_type:'Casual',
+      status:'Pending'
+      
     }
-  }
-
-}
+   ];
+ 
+   modalRef: BsModalRef | null = null;
+   leaverequestform!: FormGroup;
+   isViewMode = false;
+   isEditMode = false;
+   selectedEmployee: any = null;
+   config = {
+     backdrop: true,
+     ignoreBackdropClick: true,
+     class: 'modal-md'
+   };
+ 
+   constructor(private modalService: BsModalService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
+ 
+   ngOnInit() {
+     this.initBenefitForm();
+   }
+ 
+   initBenefitForm() {
+     this.leaverequestform = this.fb.group({
+      employee_name:[''],
+       employee_id: [''],
+       department:[''],
+       role:[''],
+       leave_type:[''],
+       status:[''],
+     });
+   }
+ 
+   get f() {
+     return this.leaverequestform.controls;
+   }
+ 
+   openCreateFormModal(template: TemplateRef<any>, type: string = '', employee: any = null) {
+     this.modalRef = this.modalService.show(template, this.config);
+     this.isViewMode = type === 'view';
+     this.isEditMode = type === 'edit';
+     this.selectedEmployee = employee;
+ 
+     if (employee) {
+       this.leaverequestform.patchValue(employee);
+     } else {
+       this.leaverequestform.reset();
+     }
+ 
+     if (this.isViewMode) {
+       this.leaverequestform.disable();
+     } else {
+       this.leaverequestform.enable();
+     }
+   }
+ 
+   closeCreateFormModal() {
+     if (this.modalRef) {
+       this.modalRef.hide();
+       this.modalRef = null;
+     }
+     this.isViewMode = false;
+     this.isEditMode = false;
+     this.selectedEmployee = null;
+     this.cdr.detectChanges();
+   }
+ 
+   addLeaveRequest() {
+     this.employees.push(this.leaverequestform.value);
+     this.closeCreateFormModal();
+   }
+ 
+   updateLeaveRequest() {
+     if (this.selectedEmployee) {
+       const index = this.employees.findIndex(
+         b => b.employee_name === this.selectedEmployee.employee_name && b.employee_name === this.selectedEmployee.employee_name
+       );
+       if (index > -1) {
+         this.employees[index] = this.leaverequestform.value;
+         this.closeCreateFormModal();
+       }
+     }
+   }
+ 
+   onDelete(employee: any) {
+     const confirmDelete = confirm(`Are you sure you want to delete ${employee.employee_name}'s record?`);
+     if (confirmDelete) {
+       this.employees = this.employees.filter(b => b.employee_name !== employee.employee_name);
+     }
+   }
+ 
+   
+ 
+   exportAttendanceReport(event: any) {
+     const selectedFormat = event.target.value;
+     if (selectedFormat === 'pdf') {
+       this.exportAsPDF();
+     } else if (selectedFormat === 'csv') {
+       this.exportAsCSV();
+     } 
+   }
+ 
+   exportAsPDF() {
+     console.log('Exporting as PDF...');
+   }
+ 
+   exportAsCSV() {
+     console.log('Exporting as CSV...');
+   }
+ 
+   
+ 
+   
+ }
+ 

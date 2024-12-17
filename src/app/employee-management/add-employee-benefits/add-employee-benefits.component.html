@@ -1,1 +1,58 @@
-<h1>Employee benefit</h1>
+<div class="content-wrapper">
+    <h2 class="main-heading">Add Employee benifits</h2>
+  
+    <form [formGroup]="documentForm" novalidate autocomplete="off" (ngSubmit)="onSubmit()" class="styled-form">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="benifit_name">Benifit Name</label>
+            <input type="text" formControlName="benifit_name" id="benifit_name" class="form-control" placeholder="Enter Benifit Name" />
+          </div>
+          <div class="col-md-6">
+            <label for="benifit_type">Benifit Type</label>
+            <input type="text" formControlName="benifit_type" id="benifit_type" class="form-control" placeholder="Enter Benifit Type" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="description">Description</label>
+            <input type="text" formControlName="description" id="description" class="form-control" placeholder="Description" />
+          </div>
+            
+        </div>
+  
+        <div class="row">
+            <div class="col-md-6">
+                <label for="eligible_criteria">Eligible Criteria</label>
+                <select formControlName="eligible_criteria" id="eligible_criteria" class="form-control">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="start_date">Start Date</label>
+                <input type="text" formControlName="start_date" id="start_date" class="form-control" placeholder="Enter Start Date" />
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+              <label for="end_date">End Date</label>
+              <input type="text" formControlName="end_date" id="end_date" class="form-control" placeholder="Enter End Date" />
+            </div>
+            <div class="col-md-6">
+                <label for="upload_document">Upload Document</label>
+                <input type="file" formControlName="upload_document" id="upload_document" class="form-control" />
+            </div>
+          </div>
+      </div>
+  
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="add-more" (click)="addMore()">Add More</button>
+        <button type="submit" class="save-and-exit ">Save and Exit</button>
+        
+        
+        
+      </div>
+    </form>
+  </div>

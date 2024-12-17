@@ -19,6 +19,8 @@ import { LaborLawComponent } from './hr-policies/labor-law/labor-law.component';
 import { HealthSafetyComponent } from './hr-policies/health-safety/health-safety.component';
 import { ContractAgreementComponent } from './hr-policies/contract-agreement/contract-agreement.component';
 import { EmployeeDataPrivacyProtectionComponent } from './hr-policies/employee-data-privacy-protection/employee-data-privacy-protection.component';
+import { HrPoliciesComponent } from './hr-policies/hr-policies/hr-policies.component';
+import { AddHrPolicyComponent } from './hr-policies/add-hr-policy/add-hr-policy.component';
 //projects;
 import { ProjectReportComponent } from './projects/project-report/project-report.component';
 import { ProjectAssignmentComponent } from './projects/project-assignment/project-assignment.component';
@@ -58,6 +60,8 @@ const routes: Routes = [
   { path: 'health-safety', component: HealthSafetyComponent },
   { path: 'contract-agreement', component: ContractAgreementComponent },
   { path: 'employee-data-privacy-protection', component: EmployeeDataPrivacyProtectionComponent },
+  {path:  'hr-policies.component',component:HrPoliciesComponent},
+  {path:  'add-hr-policy',component:AddHrPolicyComponent },
 
   // Projects routes
   { path: 'project-report', component: ProjectReportComponent },
