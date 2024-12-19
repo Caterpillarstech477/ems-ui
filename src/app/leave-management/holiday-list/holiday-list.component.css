@@ -1,6 +1,6 @@
 .content-wrapper {
-    margin-left: 40px;
-    padding: 20px;
+    margin-left: 10px;
+    padding: 10px;
     box-sizing: border-box;
 }
 .add-holiday-btn{
@@ -41,7 +41,8 @@ th {
 
 td {
     color: black;
-    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
     border: 1px solid #ddd;
 }
 
@@ -98,7 +99,7 @@ button[mat-icon-button]:hover {
 .button-wrapper {
     display: inline-block;
     text-align: center;
-    margin-right: 8px;
+    
 }
 
 .button-text-view {

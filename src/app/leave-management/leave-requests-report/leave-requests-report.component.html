@@ -1,85 +1,200 @@
 <div class="content-wrapper">
-    <div class="header-and-filters">
-      <h1 class="main-heading">Leave Request Report</h1>
-      <div class="filter-container">
-        <div class="filter-item">
-          <label for="dateRange">Date Range</label>
-          <mat-form-field class="date-range">
-            <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
-            <input matInput [matDatepicker]="dateRangePicker" placeholder="Select Date Range" [(ngModel)]="selectedDateRange">
-            <mat-datepicker #dateRangePicker startView="multi-year" selectionMode="range"></mat-datepicker>
-          </mat-form-field>
-        </div>
-  
-        <div class="filter-item">
-          <label for="leaveType">Leave Type</label>
-          <mat-form-field>
-            <mat-select [(ngModel)]="selectedLeaveType" placeholder="Select Leave Type">
-              <mat-option *ngFor="let type of leaveTypes" [value]="type">{{ type }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-  
-        <div class="filter-item">
-          <label for="export">Export</label>
-          <mat-form-field>
-            <mat-select [(ngModel)]="selectedExportOption" placeholder="Export">
-              <mat-option value="pdf">PDF File</mat-option>
-              <mat-option value="excel">Excel File</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
+  <div class="header-and-filters">
+    <h1 class="main-heading">Leave Request Report</h1>
     </div>
-  
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Employee Name</th>
-            <th>Employee ID</th>
-            <th>Department</th>
-            <th>Role</th>
-            <th>Leave Type</th>
-            <th>Status</th>
-            <th>Action</th>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>S.NO</th>
+          <th>Employee Name</th>
+          <th>Employee Id</th>
+          <th>Department</th>
+          <th>Role</th>
+          <th>Leave Type</th>
+          <th>Status</th>
+          <th>Action</th>
           </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let request of leaveRequests">
-            <td>{{ request.sno }}</td>
-            <td>{{ request.employeeName }}</td>
-            <td>{{ request.employeeId }}</td>
-            <td>{{ request.department }}</td>
-            <td>{{ request.role }}</td>
-            <td>{{ request.leaveType }}</td>
-            <td>{{ request.status }}</td>
-            <td>
-              <div class="button-wrapper">
-                <button (click)="onView(request)" mat-icon-button color="primary" class="btn-view">
-                  <mat-icon>visibility</mat-icon>
-                </button>
-                <span class="button-text-view">View</span>
-              </div>
-  
-              <div class="button-wrapper">
-                <button (click)="onEdit(request)" mat-icon-button color="accent" class="btn-edit">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <span class="button-text-edit">Edit</span>
-              </div>
-  
-              <div class="button-wrapper">
-                <button (click)="onDelete(request)" mat-icon-button color="warn" class="btn-delete">
-                  <mat-icon>delete</mat-icon>
-                </button>
-                <span class="button-text-delete">Delete</span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; index as i">
+          <td>{{ i+1}}</td>
+          <td>{{ employee.employee_name }}</td>
+          <td>{{ employee.employee_id}}</td>
+          <td>{{ employee.department}}</td>
+          <td>{{ employee.role}}</td>
+          <td>{{ employee.leave_type}}</td>
+          <td>{{ employee.status}}</td>
+          
+
+          
+          <td>
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(LeaveRequestForm, 'view', employee)"
+                mat-icon-button
+                color="primary"
+                class="btn-view"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <span class="button-text-view">View</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(LeaveRequestForm, 'edit', employee)"
+                mat-icon-button
+                color="accent"
+                class="btn-edit"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <span class="button-text-edit">Edit</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="onDelete(employee)"
+                mat-icon-button
+                color="warn"
+                class="btn-delete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <span class="button-text-delete">Delete</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #LeaveRequestForm>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="leaverequestform"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateLeaveRequest() : addLeaveRequest()"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Leave Request' : isEditMode ? 'Edit Leave Request' : 'Add Employee' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Row 1 (Employee Name, Employee Type) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="employee_name">Employee Name</label>
+              <input
+                type="text"
+                formControlName="employee_name"
+                id="employee_name"
+                class="form-control"
+                placeholder="Enter Employee Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="employee_id">Employee Id</label>
+              <input
+                type="text"
+                formControlName="employee_id"
+                id="employee_id"
+                class="form-control"
+                placeholder="Enter Employee Id"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 2 (Role, Status) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="department">Department</label>
+              <input
+                type="text"
+                formControlName="department"
+                id="department"
+                class="form-control"
+                placeholder="Enter Department"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="role">Role</label>
+              <input
+                type="text"
+                formControlName="role"
+                id="role"
+                class="form-control"
+                placeholder="Enter Role"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 3 (Check In, Check Out) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="leave_type">Leave Type</label>
+              <input
+                type="text"
+                formControlName="leave_type"
+                id="leave_type"
+                class="form-control"
+                placeholder="Enter Leave Type"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="status">Status</label>
+              <input
+                type="text"
+                formControlName="status"
+                id="status"
+                class="form-control"
+                placeholder="Enter Status"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 4 (Work Hours) -->
+          
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="closeCreateFormModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Employee' }}
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  
+</ng-template>

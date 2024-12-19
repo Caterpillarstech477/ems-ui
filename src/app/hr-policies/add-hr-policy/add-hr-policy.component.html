@@ -1,0 +1,55 @@
+<div class="content-wrapper">
+    <h2 class="main-heading">Add HR Policy</h2>
+  
+    <form [formGroup]="documentForm" novalidate autocomplete="off" (ngSubmit)="onSubmit()" class="styled-form">
+      <div class="modal-body">
+        <!-- Row 1 (Project Name, Document Name) -->
+        <div class="row">
+          <div class="col-md-6">
+            <label for="policy_type">Policy Type</label>
+            <input type="text" formControlName="policy_type" id="policy_type" class="form-control" placeholder="Enter Policy Type" />
+          </div>
+          <div class="col-md-6">
+            <label for="policy_name">Policy Name</label>
+            <input type="text" formControlName="policy_name" id="policy_name" class="form-control" placeholder="Enter Policy Name" />
+          </div>
+        </div>
+  
+        <!-- Row 2 (Document Type, Upload File) -->
+        <div class="row">
+          <div class="col-md-12">
+            <label for="description">Description</label>
+            <input type="text" formControlName="description" id="description" class="form-control" placeholder="Enter Description" />
+            
+          </div>
+          
+        </div>
+  
+        <!-- Row 3 (Uploaded By, Uploaded Date) -->
+        <div class="row">
+            <div class="col-md-6">
+                <label for="expires_at">Expires at </label>
+                <select formControlName="expires_at" id="expires_at" class="form-control">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="archived">Archived</option>
+                </select>
+              </div>
+          <div class="col-md-6">
+            <label for="uploaded_by">Uploaded By</label>
+            <input type="text" formControlName="uploaded_by" id="uploaded_by" class="form-control" placeholder="Enter Uploaded By" />
+          </div>
+          
+        </div>
+  </div>
+  
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="add-more" (click)="addMore()">Add More</button>
+        <button type="submit" class="save-and-exit ">Save and Exit</button>
+        
+        
+        
+      </div>
+    </form>
+  </div>

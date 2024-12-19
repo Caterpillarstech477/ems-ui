@@ -1,0 +1,168 @@
+<div class="content-wrapper">
+    <div class="header-and-filters">
+      <h1 class="main-heading">HR Policies</h1>
+      <!-- <button class="add-policy-btn" (click)="openCreateFormModal(projectFormModal, 'add')">
+        Add Policy
+      </button> -->
+    </div>
+  
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Policy Type</th>
+            <th>Policy Description</th>
+            <th>Related File</th>
+            <th>Policy Expired At </th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let policy of policies; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ policy.policy_type }}</td>
+            <td>{{ policy.policy_description }}</td>
+            <td>{{ policy.related_file }}</td>
+            <td>{{ policy.policy_expires_at }}</td>
+           
+            <td>
+              <div class="button-wrapper">
+                <button
+                  (click)="openCreateFormModal(projectFormModal, 'view', policy)"
+                  mat-icon-button
+                  color="primary"
+                  class="btn-view"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <span class="button-text-view">View</span>
+              </div>
+  
+              <div class="button-wrapper">
+                <button
+                  (click)="openCreateFormModal(projectFormModal, 'edit', policy)"
+                  mat-icon-button
+                  color="accent"
+                  class="btn-edit"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <span class="button-text-edit">Edit</span>
+              </div>
+  
+              <div class="button-wrapper">
+                <button
+                  (click)="onDelete(policy)"
+                  mat-icon-button
+                  color="warn"
+                  class="btn-delete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <span class="button-text-delete">Delete</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <ng-template #projectFormModal>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form
+          [formGroup]="hrPolicyForm"
+          novalidate
+          autocomplete="off"
+          (ngSubmit)="isEditMode ? updateProject() : addProject()"
+        >
+          <div class="modal-header">
+            <h4 class="modal-title">
+              {{ isViewMode ? 'View Policy' : isEditMode ? 'Edit Policy' : 'Add Policy' }}
+            </h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeCreateFormModal()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Row 1 (Policy Name, Description) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="policy_type">Policy Type</label>
+                <input
+                  type="text"
+                  formControlName="policy_type"
+                  id="policy_type"
+                  class="form-control"
+                  placeholder="Policy Type"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="policy_description">Policy Description</label>
+                <input
+                  type="text"
+                  formControlName="policy_description"
+                  id="policy_description"
+                  class="form-control"
+                  placeholder="Policy Description"
+                  [readonly]="isViewMode"
+                />
+              </div>
+            </div>
+  
+            <!-- Row 2 (Start Date, End Date) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="related_file">Related File</label>
+                <input
+                  type="text"
+                  formControlName="related_file"
+                  id="related_file"
+                  class="form-control"
+                  placeholder="Related File"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="policy_expires_at">Policy Expires at </label>
+                <input
+                  type="text"
+                  formControlName="policy_expires_at"
+                  id="policy_expires_at"
+                  class="form-control"
+                  [readonly]="isViewMode"
+                  placeholder="Policy Expires at"
+                />
+              </div>
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="closeCreateFormModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-success"
+              *ngIf="!isViewMode"
+            >
+              {{ isEditMode ? 'Save Changes' : 'Add Policy' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+  

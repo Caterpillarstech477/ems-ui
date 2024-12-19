@@ -1,0 +1,176 @@
+<div class="content-wrapper">
+  <div class="header-and-filters">
+    <h1 class="main-heading">Employee benifit Report</h1>
+    <div class="search-container">
+      <div class="input-wrapper">
+        <input
+          type="text"
+          class="form-control search-input"
+          placeholder="Search for Employee"
+          [(ngModel)]="searchTerm"
+          (input)="filterTable()"
+        />
+        <mat-icon class="search-icon">search</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Employee Name</th>
+          <th>Benefit Name</th>
+          <th>Benefit Description</th>
+          <th>Start && End Date </th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let benefit of filteredBenefits; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ benefit.employee_name }}</td>
+          <td>{{ benefit.benefit_name }}</td>
+          <td>{{ benefit.benefit_description }}</td>
+          <td>{{ benefit.benfit_start_and_end_date }}</td>
+          
+          <td>
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AddBenefitForm, 'view', benefit)"
+                mat-icon-button
+                color="primary"
+                class="btn-view"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <span class="button-text-view">View</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AddBenefitForm, 'edit', benefit)"
+                mat-icon-button
+                color="accent"
+                class="btn-edit"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <span class="button-text-edit">Edit</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="onDelete(benefit)"
+                mat-icon-button
+                color="warn"
+                class="btn-delete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <span class="button-text-delete">Delete</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #AddBenefitForm>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="benefitForm"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateBenefit() : addBenefit()"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Benefit' : isEditMode ? 'Edit Benefit' : 'Add Benefit' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Row 1 (Benefit Name, Benefit Type) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="employee_name">Employee Name</label>
+              <input
+                type="text"
+                formControlName="employee_name"
+                id="employee_name"
+                class="form-control"
+                placeholder="Enter Benefit Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="benefit_name">Benefit Name</label>
+              <input
+                type="text"
+                formControlName="benefit_name"
+                id="benefit_name"
+                class="form-control"
+                placeholder="Enter Benefit Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 2 (Benefit Value, Assigned To) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="benefit_description">Benefit Description</label>
+              <input
+                type="text"
+                formControlName="benefit_description"
+                id="benefit_description"
+                class="form-control"
+                placeholder="Enter Benefit Value"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="benfit_start_and_end_date">Start && End date </label>
+              <input
+                type="text"
+                formControlName="benfit_start_and_end_date"
+                id="benfit_start_and_end_date"
+                class="form-control"
+                placeholder="Enter Assigned To"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="closeCreateFormModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Benefit' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

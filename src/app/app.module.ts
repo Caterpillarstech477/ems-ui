@@ -41,6 +41,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EmployeeProfileManagementComponent } from './employee-management/employee-profile-management/employee-profile-management.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HrPoliciesComponent } from './hr-policies/hr-policies/hr-policies.component';
+import { AddHrPolicyComponent } from './hr-policies/add-hr-policy/add-hr-policy.component'; 
 
 @NgModule({
   declarations: [
@@ -70,7 +73,9 @@ import { LoginComponent } from './login/login.component';
     AddAlertsNotificationsComponent,
     AddAssetComponent,
     EmployeeProfileManagementComponent,
-    LoginComponent
+    LoginComponent,
+    HrPoliciesComponent,
+    AddHrPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +92,8 @@ import { LoginComponent } from './login/login.component';
     MatDatepickerModule,
     MatIconModule,
     MatButtonModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

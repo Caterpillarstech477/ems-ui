@@ -1,6 +1,6 @@
 .content-wrapper {
-    margin-left: 60px;
-    padding: 20px;
+    margin-left: 10px;
+    padding: 10px;
     box-sizing: border-box;
   }
   
@@ -33,10 +33,19 @@
     border-collapse: collapse;
     text-align: left;
   }
-  
-  th, td {
-    padding: 10px;
+  th{
+    padding: 5px;
     border: 1px solid #ddd;
+    color: #16446c;
+
+  }
+  
+   td {
+    
+    color: black;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
   }
   
   th {
@@ -266,3 +275,5 @@
     background-color: #073863;
     border: none;
   }
+ 
+  
