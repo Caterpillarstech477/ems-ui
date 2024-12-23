@@ -23,9 +23,8 @@
           <tr *ngFor="let holiday of holidays; index as i">
             <td>{{ i + 1 }}</td>
             <td>{{ holiday.holiday_name}}</td>
-            <td>{{ holiday.date }}</td>
-            <td>{{ holiday.day }}</td>
-            <td>{{ holiday.type }}</td>
+            <td>{{ holiday.holiday_date }}</td>
+            <td>{{ holiday.holiday_type }}</td>
             <td>{{ holiday.region }}</td>
             <td>
               <div class="button-wrapper">
