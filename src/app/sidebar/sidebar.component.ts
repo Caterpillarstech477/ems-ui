@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,13 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
-  //dropdownOpen = false;
+  constructor(private router: Router) {}
+  
   activeDropdown: string | null = null;
+  
+ 
 
-//   toggleDropdown() {
-//     this.dropdownOpen = !this.dropdownOpen;
-// }
+
 toggleDropdown(dropdown: string): void {
   this.activeDropdown = this.activeDropdown === dropdown ? null : dropdown;
 }
+logout() {
+  // Clear user session data (e.g., tokens)
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // Navigate to the login page
+  this.router.navigate(['/login']);
+}
+
 }

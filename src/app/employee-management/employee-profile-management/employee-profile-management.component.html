@@ -67,7 +67,7 @@
     </table>
   </div>
 </div>
-
+<div *ngIf="isModalOpen" class="overlay"></div>
 <ng-template #AddEmployeeForm>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -302,10 +302,10 @@
           <!-- Row 8 (Employment Status, Hiring Date) -->
           <div class="row">
             <div class="col-md-6">
-              <label for="employment_status">Employment Status</label>
+              <label for="status">Employment Status</label>
               <select
-                formControlName="employment_status"
-                id="employment_status"
+                formControlName="status"
+                id="status"
                 class="form-control"
                 [disabled]="isViewMode"
               >
@@ -315,11 +315,11 @@
               </select>
             </div>
             <div class="col-md-6">
-              <label for="hire_dateStr">Hiring Date</label>
+              <label for="Hire_dateStr">Hiring Date</label>
               <input
                 type="date"
-                formControlName="hire_dateStr"
-                id="hire_dateStr"
+                formControlName="Hire_dateStr"
+                id="Hire_dateStr"
                 class="form-control"
                 [readonly]="isViewMode"
               />

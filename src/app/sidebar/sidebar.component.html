@@ -1,3 +1,5 @@
+
+
 <nav class="sidebar">
   <div class="sidebar-header">
      <img src="assets/images/logo.png" alt="Caterpillars Tech Logo" class="sidebar-logo" />
@@ -144,14 +146,14 @@
   <ul *ngIf="activeDropdown === 'projects'" class="submenu">
     <li>
       <a routerLink="/project-report" routerLinkActive="active">
-        <mat-icon>article</mat-icon> Project Report
+        <mat-icon>article</mat-icon> Project List
       </a>
     </li>
-    <!-- <li>
-      <a routerLink="/project-assignment" routerLinkActive="active">
-        <mat-icon>assignment_ind</mat-icon> Project Assignment
+    <li>
+      <a routerLink="/project-report-document" routerLinkActive="active">
+        <mat-icon>assignment_ind</mat-icon> Project Report
       </a>
-    </li> -->
+    </li>
     <li>
       <a routerLink="/project-documentation" routerLinkActive="active">
         <mat-icon>folder</mat-icon> Project Documentation
@@ -212,5 +214,6 @@
       </a>
     </li>
   </ul>
+  <button class="logout-btn" (click)="logout()">Logout</button>
   
 </nav>

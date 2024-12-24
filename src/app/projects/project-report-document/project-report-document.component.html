@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-    <h2 class="main-heading">Project Documentation</h2>
+    <h2 class="main-heading">Project Report</h2>
   
     <form [formGroup]="documentForm" novalidate autocomplete="off" (ngSubmit)="onSubmit()" class="styled-form">
       <div class="modal-body">
@@ -27,29 +27,16 @@
             </select>
           </div>
           <div class="col-md-6">
-            <label for="uploadFile">Upload File</label>
-            <input type="file" formControlName="uploadFile" id="uploadFile" class="form-control" />
+            <label for="documentName">Document Version</label>
+            <input type="text" formControlName="documentName" id="documentName" class="form-control" placeholder="Enter Document Version" />
           </div>
         </div>
   
-        <!-- Row 3 (Uploaded By, Uploaded Date) -->
-        <div class="row">
-          <div class="col-md-6">
-            <label for="uploadedBy">Uploaded By</label>
-            <input type="text" formControlName="uploadedBy" id="uploadedBy" class="form-control" placeholder="Uploaded File" />
-          </div>
-          <div class="col-md-6">
-            <label for="uploadedDate">Uploaded Date</label>
-            <input type="date" formControlName="uploadedDate" id="uploadedDate" class="form-control" />
-          </div>
-        </div>
+       
   
         <!-- Row 4 (Document Version, Status) -->
         <div class="row">
-          <div class="col-md-6">
-            <label for="documentVersion">Document Version</label>
-            <input type="text" formControlName="documentVersion" id="documentVersion" class="form-control" placeholder="Enter Document Version" />
-          </div>
+          
           <div class="col-md-6">
             <label for="status">Status</label>
             <select formControlName="status" id="status" class="form-control">
@@ -57,6 +44,10 @@
               <option value="inactive">Inactive</option>
               <option value="archived">Archived</option>
             </select>
+          </div>
+          <div class="col-md-6">
+            <label for="uploadFile">Related File</label>
+            <input type="file" formControlName="uploadFile" id="uploadFile" class="form-control" />
           </div>
         </div>
       </div>
@@ -71,3 +62,4 @@
       </div>
     </form>
   </div>
+
