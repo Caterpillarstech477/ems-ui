@@ -10,7 +10,8 @@
   padding: 8px 12px;
   border: none;
   border-radius: 10px;
-  width: 12%;
+  width: 15%;
+  cursor: pointer;
 
 }
 .header-and-filters {
@@ -123,5 +124,159 @@ button[mat-icon-button]:hover {
     font-size: 12px;
     color: #b91d1d;
     margin-top: 5px;
+}
+
+/* add employee form styles */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-dialog {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the modal */
+  max-width: 90%; /* Adjust modal width */
+  margin-left: 0; 
+  padding-top: 10px;
+}
+modal-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(80vh - 70px);
+  background-color: #f7f7f7; /* Light gray background */
+  padding: 20px; /* Optional: Add padding to the form */
+  border-radius: 8px; /* Optional: Round the corners */
+}
+
+/* Optional: Add a shadow effect to the modal for a more distinct look */
+.modal-content {
+  border-radius: 10px;
+  width: 120%;
+  background-color: #fff; /* White background for the modal */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow for the modal */
+}
+
+/* .modal-content {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  padding: 0;
+} */
+
+
+.modal-header {
+  padding: 12px;
+  display: flex;
+  justify-content: flex-start; /* Align heading to the left */
+  background-color: #f1f1f1;
+}
+
+.modal-header .modal-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #94ab64;
+}
+
+.modal-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: calc(75vh - 80px);
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 6px;
+  font-size: 12px;
+  border: 1px solid #cfcfcf; /* Set border color */
+  box-sizing: border-box;
+}
+
+label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #555555; /* Set label color */
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px;
+  padding: 8px 15px;
+  background-color: #f8f9fa;
+}
+
+.btn {
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.btn-danger {
+  background-color: #d9534f;
+  border: none;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  border: none;
+}
+
+.modal-body .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-body .row > div {
+  padding-right: 10px;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.modal-body .col-md-6 {
+  width: 48%;
+}
+
+.modal-body .col-md-4 {
+  width: 48%;
+}
+
+.modal-body .row div {
+  flex-grow: 1;
+}
+
+.modal-body .form-control {
+  font-size: 12px;
+}
+
+.modal-header .close {
+  display: none; /* Hide the close icon */
+}
+.btn-danger {
+  background-color: #b91d1d;
+  border: none;
+}
+
+.btn-success {
+  background-color: #809f3d;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #073863;
+  border: none;
 }
 

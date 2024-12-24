@@ -1,7 +1,9 @@
 <div class="content-wrapper">
     <div class="header-and-filters">
       <h1 class="main-heading">Holidays List</h1>
-      <button class="add-holiday-btn">Add Holiday</button>
+      <button class="add-holiday-btn" (click)="openCreateFormModal(AddHolidayForm, 'add')">
+        Add Holiday
+      </button>
     </div>
   
     <div class="table-container">
@@ -20,28 +22,28 @@
         <tbody>
           <tr *ngFor="let holiday of holidays; index as i">
             <td>{{ i + 1 }}</td>
-            <td>{{ holiday.name }}</td>
+            <td>{{ holiday.holiday_name}}</td>
             <td>{{ holiday.date }}</td>
             <td>{{ holiday.day }}</td>
             <td>{{ holiday.type }}</td>
             <td>{{ holiday.region }}</td>
             <td>
               <div class="button-wrapper">
-                <button (click)="onView(holiday)" mat-icon-button color="primary" class="btn-view">
+                <button (click)="openCreateFormModal(AddHolidayForm, 'view', holiday)" mat-icon-button color="primary" class="btn-view">  <!--Required changes-->
                   <mat-icon>visibility</mat-icon>
                 </button>
                 <span class="button-text-view">View</span>
               </div>
   
               <div class="button-wrapper">
-                <button (click)="onEdit(holiday)" mat-icon-button color="accent" class="btn-edit">
+                <button (click)="openCreateFormModal(AddHolidayForm, 'edit', holiday)" mat-icon-button color="accent" class="btn-edit"> <!--Required changes-->
                   <mat-icon>edit</mat-icon>
                 </button>
                 <span class="button-text-edit">Edit</span>
               </div>
   
               <div class="button-wrapper">
-                <button (click)="onDelete(holiday)" mat-icon-button color="warn" class="btn-delete">
+                <button (click)="onDelete(holiday)" mat-icon-button color="warn" class="btn-delete"> 
                   <mat-icon>delete</mat-icon>
                 </button>
                 <span class="button-text-delete">Delete</span>
@@ -51,5 +53,130 @@
         </tbody>
       </table>
     </div>
+</div>
+  
+<ng-template #AddHolidayForm>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="addHolidayForm"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateHoliday() : addHoliday()">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Holiday' : isEditMode ? 'Edit Holiday' : 'Add Holiday' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Row 1 (Holiday Name, Holiday Type) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="holiday_name">Holiday Name</label>
+              <input
+                type="text"
+                formControlName="holiday_name"
+                id="holiday_name"
+                class="form-control"
+                placeholder="Enter Holiday Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+              
+              <div class="col-md-6">
+                <label for="holiday_type">Holiday Type</label>
+                <select
+                  formControlName="holiday_type"
+                  id="holiday_type"
+                  class="form-control"
+                  [disabled]="isViewMode"
+                >
+                  <option value="">Public</option>
+                  <option value="">Company</option>
+                  <option value="">Others</option>
+                </select>
+              </div>
+          </div>
+
+          <!-- Row 2 (Holiday Date , Region) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="holiday_date">Holiday Date</label>
+              <input
+                type="date"
+                formControlName="holiday_date"
+                id="holiday_date"
+                class="form-control"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="region">Region</label>
+              <select
+                formControlName="region"
+                id="region"
+                class="form-control"
+                [disabled]="isViewMode"
+              >
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 3 (Description) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="description">Description</label>
+              <input
+                type="text"
+                formControlName="description"
+                id="description"
+                class="form-control"
+                placeholder="Enter description"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+         
+          <!-- Row 4 (Is Recurring) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="is_recurring">Is Recurring</label>
+              <select formControlName="is_recurring" id="is_recurring"
+                class="form-control" [disabled]="isViewMode" >
+                <option value="">Yes</option>
+                <option value="">No</option>
+                <option value="">others</option>
+              </select>
+            </div>
+            
+          </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeCreateFormModal()">Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Holiday' }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
+</ng-template>
   
