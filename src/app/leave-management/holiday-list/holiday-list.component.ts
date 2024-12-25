@@ -3,7 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Holiday } from './model/Holiday.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-holiday-list',
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./holiday-list.component.css']
 })
 export class HolidayListComponent {
-   private HOLIDAY_REST_API_URL = 'http://localhost:8080/api/holidays';  // URL to REST api
+   private HOLIDAY_REST_API_BASE_URL = 'http://localhost:8080/api/holidays';  // URL to REST api
     holidays: Holiday[] = []; // Array of holiday objects
   
   modalRef: BsModalRef | null = null;
@@ -31,6 +31,7 @@ export class HolidayListComponent {
 
   ngOnInit() {
     this.initHolidayForm();
+    this.fetchAllHolidays();
   }
 
   initHolidayForm() {
@@ -88,14 +89,14 @@ export class HolidayListComponent {
     console.log('calling addHoliday', this.addHolidayForm.value);
     
         const holiday: Holiday = this.addHolidayForm.value as Holiday;
-        console.log('Form +Submitted and converted into employee object', holiday);
+        console.log('Form +Submitted and converted into holiday object', holiday);
     
-        // this.http
-        // .post<Holiday>(this.HOLIDAY_REST_API_URL, holiday)
-        // .subscribe(response => {
-        //      console.log('holiday saved successfully', response);
-        //      this.holidays.push(response);
-        // });
+        this.http
+        .post<Holiday>(this.HOLIDAY_REST_API_BASE_URL+"/add", holiday)
+        .subscribe(response => {
+             console.log('holiday saved successfully', response);
+             this.holidays.push(response);
+        });
 
         this.holidays.push(holiday);
           //console.log('this.employees', this.employees);
@@ -114,10 +115,42 @@ export class HolidayListComponent {
     }
   }
 
-  onDelete(holiday: any) {
+  onDelete(holiday: Holiday) {
+    console.log("deleting holiday : " , holiday);
     const confirmDelete = confirm(`Are you sure want to remove ${holiday.holiday_name} from holiday list?`);
     if (confirmDelete) {
-      this.holidays = this.holidays.filter(hol => hol !== holiday);
+      
+      const options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: holiday,
+      };
+
+      this.http.delete<Holiday>(this.HOLIDAY_REST_API_BASE_URL+"/delete", options).subscribe(
+        data => {
+          console.log("after deleting the holiday, response from backend : " , data);
+          this.holidays = this.holidays.filter(hol => hol.holiday_name !== data.holiday_name);
+        }
+      )
+      
     }
+  }
+
+  fetchAllHolidays() {
+    this.http
+        .get<Holiday[]>(this.HOLIDAY_REST_API_BASE_URL+"/fetchAll")
+        .subscribe(
+          data => {
+            this.holidays = data;
+            console.log('Holidays loaded successfully', this.holidays);
+          },
+          error => {
+            console.error('Error loading holidays', error);
+            // alert('Failed to load employees. Please try again later.');
+          }
+        );
+
+    this.holidays 
   }
 }
