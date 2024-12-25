@@ -41,7 +41,7 @@ export class HolidayListComponent {
       holiday_date: ['', [Validators.required]],
       region: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      is_recurring: ['', [Validators.required]],
+      is_recurring: ['', []],
       
       
     });
@@ -106,13 +106,37 @@ export class HolidayListComponent {
 
 
   updateHoliday() {
-    if (this.addHolidayForm.valid && this.selectedHoliday) {
-      const index = this.holidays.findIndex(hol => hol === this.selectedHoliday);
-      if (index > -1) {
-        this.holidays[index] = this.addHolidayForm.value;
-        this.closeCreateFormModal();
+      console.log(this.selectedHoliday);
+
+       if (this.addHolidayForm.valid && this.selectedHoliday) {
+        const updatedHoliday: Holiday = {
+          ...this.selectedHoliday,
+          ...this.addHolidayForm.value
+        };
+    
+        this.http
+          .put<Holiday>(this.HOLIDAY_REST_API_BASE_URL+"/update", updatedHoliday) // Send the updated employee object
+          .subscribe(
+            response => {
+              const index = this.holidays.findIndex(holiday => holiday.id === updatedHoliday.id);
+    
+              if (index > -1) {
+                this.holidays[index] = response;
+              } else {
+                console.error('holiday not found in local array');
+              }
+            console.log("updated",updatedHoliday)
+    
+              this.closeCreateFormModal();
+            },
+            error => {
+              console.error('Error updating holiday:', error);
+            }
+          );
+      } else {
+        console.error('Form is invalid or selectedHoliday is missing');
       }
-    }
+    
   }
 
   onDelete(holiday: Holiday) {
