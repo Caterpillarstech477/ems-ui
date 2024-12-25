@@ -58,51 +58,34 @@ export class EmployeeProfileManagementComponent {
 
   ngOnInit() {
     this.initEmployeeForm();
-    this.getMethod()
-    this.postMethod()
+    this.getEmployee();
+    // this.getMethod()
+    // this.postMethod()
   }
-  public getMethod(){
-    this.http.get('https://jsonplaceholder.typicode.com/posts/1').subscribe((data)=>{
-      console.log('data',data)
-    })
-  }
-  public postMethod(){
-    const header =new HttpHeaders({
-      contentType:'application/json'
+  // public getMethod(){
+  //   this.http.get('https://jsonplaceholder.typicode.com/posts/1').subscribe((data)=>{
+  //     console.log('data',data)
+  //   })
+  // }
+  // public postMethod(){
+  //   const header =new HttpHeaders({
+  //     contentType:'application/json'
 
-    })
-    let body ={
-      title: 'foo',
-      body: 'bar',
-      userId: 1
-    }
-    this.http.post('https://jsonplaceholder.typicode.com/posts',body,{headers:header}).subscribe((data)=>{
-      console.log('data',data)
-    })
+  //   })
+  //   let body ={
+  //     title: 'foo',
+  //     body: 'bar',
+  //     userId: 1
+  //   }
+  //   this.http.post('https://jsonplaceholder.typicode.com/posts',body,{headers:header}).subscribe((data)=>{
+  //     console.log('data',data)
+  //   })
   
     
-  }
+  // }
 
   initEmployeeForm() {
-    //this.addEmployeeForm = this.fb.group({
-      // first_name: ['', [Validators.required]],
-      // last_name: ['', [Validators.required]],
-      // gender: ['', [Validators.required]],
-      // dob: ['', [Validators.required]],
-      // mobile_number: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      // email: ['', [Validators.required, Validators.email]],
-      // emergency_number: ['', [Validators.pattern('^[0-9]*$')]],
-      // address: ['', [Validators.required]],
-      // city: ['', [Validators.required]],
-      // state: ['', [Validators.required]],
-      // postal_code: ['', [Validators.required]],
-      // country: ['', [Validators.required]],
-      // job_title: ['', [Validators.required]],
-      // ni_number: ['', [Validators.required]],
-      // salary: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      // employment_type: ['', [Validators.required]],
-      // employment_status: ['', [Validators.required]],
-      // hiring_date: ['', [Validators.required]]
+    
       this.addEmployeeForm = this.fb.group({
         first_name: ['', [Validators.required]],
         last_name: ['', [Validators.required]],
@@ -120,8 +103,8 @@ export class EmployeeProfileManagementComponent {
         ni_number: ['', [Validators.required]],
         salary: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
         employment_type: ['', [Validators.required]],
-        employment_status: ['', [Validators.required]],
-        hire_dateStr: ['', [Validators.required]]
+        status: ['', [Validators.required]],
+        Hire_dateStr: ['']
     });
         
     //});
@@ -162,6 +145,18 @@ export class EmployeeProfileManagementComponent {
     this.isEditMode = false;
     this.selectedEmployee = null;
   }
+  getEmployee(){
+    this.http.get<Employee[]>(this.EMPLOYEE_REST_API_URL).subscribe(
+      data => {
+        this.employees = data;
+        console.log('Employees loaded successfully', this.employees);
+      },
+      error => {
+        console.error('Error loading employees', error);
+        // alert('Failed to load employees. Please try again later.');
+      }
+    );
+  }
 
   addEmployee() {
     
@@ -176,27 +171,78 @@ export class EmployeeProfileManagementComponent {
          this.employees.push(response);
     });
     // if (this.addEmployeeForm.valid) {
-      this.employees.push(this.addEmployeeForm.value);
+      //this.employees.push(this.addEmployeeForm.value);
       console.log('this.employees', this.employees);
 
       this.closeCreateFormModal();
     // }
   }
 
+  // updateEmployee() {
+  //   if (this.addEmployeeForm.valid && this.selectedEmployee) {
+  //     const index = this.employees.findIndex(emp => emp === this.selectedEmployee);
+  //     if (index > -1) {
+  //       this.employees[index] = this.addEmployeeForm.value;
+        
+  //       this.closeCreateFormModal();
+  //     }
+  //   }
+  // }
+  
   updateEmployee() {
+    
     if (this.addEmployeeForm.valid && this.selectedEmployee) {
-      const index = this.employees.findIndex(emp => emp === this.selectedEmployee);
-      if (index > -1) {
-        this.employees[index] = this.addEmployeeForm.value;
-        this.closeCreateFormModal();
-      }
+      const updatedEmployee: Employee = {
+        ...this.selectedEmployee,
+        ...this.addEmployeeForm.value
+      };
+  
+      this.http
+        .put<Employee>(`${this.EMPLOYEE_REST_API_URL}`, updatedEmployee) // Send the updated employee object
+        .subscribe(
+          response => {
+            const index = this.employees.findIndex(emp => emp.employeeId === updatedEmployee.employeeId);
+  
+            if (index > -1) {
+              this.employees[index] = response;
+            } else {
+              console.error('Employee not found in local array');
+            }
+          console.log("updated",updatedEmployee)
+  
+            this.closeCreateFormModal();
+          },
+          error => {
+            console.error('Error updating employee:', error);
+          }
+        );
+    } else {
+      console.error('Form is invalid or selectedEmployee is missing');
     }
   }
+  
+  
+  
 
-  onDelete(employee: any) {
+  // onDelete(employee: any) {
+  //   const confirmDelete = confirm(`Are you sure you want to delete ${employee.first_name} ${employee.last_name}?`);
+  //   if (confirmDelete) {
+  //     this.employees = this.employees.filter(emp => emp !== employee);
+  //   }
+  // }
+  onDelete(employee: Employee) {
     const confirmDelete = confirm(`Are you sure you want to delete ${employee.first_name} ${employee.last_name}?`);
     if (confirmDelete) {
-      this.employees = this.employees.filter(emp => emp !== employee);
+      this.http.delete(`${this.EMPLOYEE_REST_API_URL}/${employee.employeeId}`).subscribe(
+        () => {
+          // Remove the employee from the local array after successful deletion
+          this.employees = this.employees.filter(emp => emp.employeeId !== employee.employeeId);
+        },
+        error => {
+          alert('Failed to delete employee. Please try again later.');
+        }
+      );
     }
   }
+  
 }

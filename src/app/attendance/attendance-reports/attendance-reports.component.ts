@@ -19,7 +19,8 @@ export class AttendanceReportsComponent {
       status:'Present',
       check_in:'09:00 AM',
       check_out:'6.00PM',
-      work_hours:'9 Hours'
+      work_hours:'9 Hours',
+      remarks:'Checkout time early'
     },
     {
       date:'2024-12-16',
@@ -28,7 +29,8 @@ export class AttendanceReportsComponent {
       status:'Present',
       check_in:'09:00 AM',
       check_out:'6.00PM',
-      work_hours:'9 Hours'
+      work_hours:'9 Hours',
+      remarks:'Login time is late'
     }
   ];
 
@@ -57,7 +59,8 @@ export class AttendanceReportsComponent {
       status: [''],
       check_in: [''],
       check_out: [''],
-      work_hours: ['']
+      work_hours: [''],
+      remarks:['']
     });
   }
 

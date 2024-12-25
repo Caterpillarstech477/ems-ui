@@ -25,7 +25,7 @@ export class EmployeeBenefitReportsComponent {
       
     }
   ];
-
+ 
   modalRef: BsModalRef | null = null;
   benefitForm!: FormGroup;
   isViewMode = false;
@@ -38,6 +38,7 @@ export class EmployeeBenefitReportsComponent {
   };
   searchTerm: string = '';
   filteredBenefits = [...this.benefits];
+  isModalOpen = false;
 
   filterTable() {
     this.filteredBenefits = this.benefits.filter(benefit =>
@@ -68,6 +69,7 @@ export class EmployeeBenefitReportsComponent {
 
   // Open the modal for adding, editing or viewing benefits
   openCreateFormModal(template: TemplateRef<any>, type: string = '', benefit: any = null) {
+    this.isModalOpen = true;
     this.modalRef = this.modalService.show(template, this.config);
     this.isViewMode = type === 'view';
     this.isEditMode = type === 'edit';
@@ -92,9 +94,16 @@ export class EmployeeBenefitReportsComponent {
       this.modalRef.hide();
       this.modalRef = null;
     }
+    this.isModalOpen = false;
     this.isViewMode = false;
     this.isEditMode = false;
     this.selectedBenefit = null;
+    //this.benefitForm.reset();
+    console.log('Modal closed, resetting state:', {
+      isViewMode: this.isViewMode,
+      isEditMode: this.isEditMode,
+      isModalOpen: this.isModalOpen,
+    });
     
     this.cdr.detectChanges();
   }

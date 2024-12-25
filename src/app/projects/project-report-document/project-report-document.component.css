@@ -1,129 +1,118 @@
-.content-wrapper{
-    margin-left: 10px;
-    padding: 10px;
+.content-wrapper {
+    margin-left: 60px;
+    padding: 20px;
     box-sizing: border-box;
-  }
-  
-  .add-project-btn {
-    background-color: #7ca045;
-    color: white;
-    font-weight: bold;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 10px;
-    width: 15%;
-    cursor: pointer;
-  }
-  
-  .header-and-filters {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;           
-    margin-bottom: 20px;           
-  }
-  
-  .table-container {
-    margin: 20px auto;
-    width: 90%;
-    overflow-x: auto;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-  }
-  th{
-    border: 1px solid #ddd;
-    padding: 3px;
-
-  }
-   td {
-   
-    border: 1px solid #ddd;
-    text-align:center;
-    vertical-align: middle;
-    
-    
-  }
-  
-  th {
-    background-color: #f4f4f4;
-    color: #16446c;
-    font-weight: bold;
   }
   
   .main-heading {
     font-size: 24px;
     color: #7ca045;
     font-weight: 500;
-    flex: 1;
+    margin-bottom: 20px;
   }
   
-  button[mat-icon-button] {
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin: 0 2px;
-    display: inline-flex;
-    justify-content: center;
+  .row {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    border: none;
-    padding: 0;
+    margin-bottom: 20px;
   }
   
-  button[mat-icon-button] mat-icon {
-    color: white;
-    font-size: 18px;
+  .modal-body {
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
   }
   
-  button[mat-icon-button]:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  .form-group {
+    margin-bottom: 10px;
   }
   
-  .btn-view {
-    background-color: #083864;
+  .form-control {
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+    border: 1px solid #cfcfcf;
+    box-sizing: border-box;
   }
   
-  .btn-edit {
+  label {
+    font-weight: bold;
+    font-size: 12px;
+    color: #555555;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 8px 15px;
+    background-color: #f8f9fa;
+  }
+  
+  .btn {
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .add-more {
     background-color: #809f3d;
-  }
-  
-  .btn-delete {
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Increase padding for larger buttons */
+    font-size: 16px; /* Increase font size */
+    text-align: center; /* Center-align text */
+    border-radius: 10px; /* Rounded corners */
+    display: inline-block; /* Ensure the button behaves like a block element */
+    cursor: pointer; /* Add pointer cursor on hover */
+}
+
+.save-and-exit {
     background-color: #b91d1d;
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Increase padding for larger buttons */
+    font-size: 16px; /* Increase font size */
+    text-align: center; /* Center-align text */
+    border-radius: 10px; /* Rounded corners */
+    display: inline-block; /* Ensure the button behaves like a block element */
+    cursor: pointer; /* Add pointer cursor on hover */
+}
+
+/* Optional: Add hover effects for better user interaction */
+.add-more:hover {
+    background-color: #708c2b; /* Slightly darker shade */
+}
+
+.save-and-exit:hover {
+    background-color: #a11f1f; /* Slightly darker shade */
+}
+  
+   
+  .btn-warning {
+    background-color: #f0ad4e;
+    border: none;
   }
   
-  .button-wrapper {
-    display: inline-block;
-    text-align: center;
-    margin-right: 8px;
+  .btn-success:hover {
+    background-color: #6f8e2f;
   }
   
-  .button-text-view {
-    display: block;
-    text-align: center;
+  .btn-warning:hover {
+    background-color: #f39c12;
+  }
+  
+  button[type="file"] {
+    padding: 6px 12px;
     font-size: 12px;
-    color: #083864;
-    margin-top: 5px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border-radius: 4px;
   }
   
-  .button-text-edit {
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: #809f3d;
-    margin-top: 5px;
+  button[type="file"]:hover {
+    background-color: #e1e1e1;
   }
-  
-  .button-text-delete {
-    display: block;
-    text-align: center;
-    font-size: 12px;
-    color: #b91d1d;
-    margin-top: 5px;
-  }
-  
-  /* Add project form styles */
   .row {
     display: flex;
     justify-content: space-between;
@@ -142,7 +131,7 @@
     flex: 1;
     overflow-y: auto;
     max-height: calc(80vh - 60px);
-    background-color: #f7f7f7; /* Light gray background */
+    background-color: #ffffff; /* Light gray background */
     padding: 20px; /* Optional: Add padding to the form */
     border-radius: 8px; /* Optional: Round the corners */
   }
@@ -205,7 +194,7 @@
     justify-content: flex-start; /* Align buttons to the left */
     gap: 10px;
     padding: 8px 15px;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
   }
   
   .btn {
@@ -263,22 +252,26 @@
   .btn-danger {
     background-color: #b91d1d;
     border: none;
-    padding: 12px 20px; /* Increase padding for bigger buttons */
-    font-size: 14px; /* Increase font size */
-    border-radius: 12px; 
-    color:white/* Add rounded corners */
   }
   
   .btn-success {
     background-color: #809f3d;
     border: none;
-    padding: 12px 20px; /* Increase padding for bigger buttons */
-    font-size: 14px; /* Increase font size */
-    border-radius: 12px;
-    color:white /* Add rounded corners */
   }
   
   .btn-warning {
     background-color: #073863;
     border: none;
   }
+  /* form border */
+  .styled-form {
+    border: 1px solid #ced4da;
+    border-radius: 8px; 
+    padding: 20px; 
+    margin: 20px auto; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .styled-form .form-control {
+    border-radius: 4px; 
+  }
+  

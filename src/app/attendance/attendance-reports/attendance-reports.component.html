@@ -1,6 +1,9 @@
 <div class="content-wrapper">
     <div class="header-and-filters">
       <h1 class="main-heading">Attendence Report</h1>
+      <button class="add-asset-btn" (click)="openCreateFormModal(AttedenceReportForm, 'add')">
+        Add Attendence
+      </button>
       </div>
   
     <div class="table-container">
@@ -83,7 +86,7 @@
         >
           <div class="modal-header">
             <h4 class="modal-title">
-              {{ isViewMode ? 'View Attendence' : isEditMode ? 'Edit Attendence' : 'Add Employee' }}
+              {{ isViewMode ? 'View Attendence' : isEditMode ? 'Edit Attendence' : 'Add Attendence' }}
             </h4>
             <button
               type="button"
@@ -98,18 +101,7 @@
           <div class="modal-body">
             <!-- Row 1 (Employee Name, Employee Type) -->
             <div class="row">
-              <div class="col-md-6">
-                <label for="date">Date</label>
-                <input
-                  type="text"
-                  formControlName="date"
-                  id="date"
-                  class="form-control"
-                  placeholder="Enter Employee Name"
-                  [readonly]="isViewMode"
-                />
-              </div>
-              <div class="col-md-6">
+               <div class="col-md-6">
                 <label for="employee_name">Employee Name</label>
                 <input
                   type="text"
@@ -120,9 +112,45 @@
                   [readonly]="isViewMode"
                 />
               </div>
+              <div class="col-md-6">
+                <label for="date">Date</label>
+                <input
+                  type="text"
+                  formControlName="date"
+                  id="date"
+                  class="form-control"
+                  placeholder="Enter Date"
+                  [readonly]="isViewMode"
+                />
+              </div>
+            </div>
+             <!-- Row 2 (Check In, Check Out) -->
+            <div class="row">
+              <div class="col-md-6">
+                <label for="check_in">Check In</label>
+                <input
+                  type="text"
+                  formControlName="check_in"
+                  id="check_in"
+                  class="form-control"
+                  placeholder="Enter Check In Time"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="check_out">Check Out</label>
+                <input
+                  type="text"
+                  formControlName="check_out"
+                  id="check_out"
+                  class="form-control"
+                  placeholder="Enter Check Out Time"
+                  [readonly]="isViewMode"
+                />
+              </div>
             </div>
   
-            <!-- Row 2 (Role, Status) -->
+            <!-- Row 3 (Role, Status) -->
             <div class="row">
               <div class="col-md-6">
                 <label for="role">Role</label>
@@ -148,31 +176,8 @@
               </div>
             </div>
   
-            <!-- Row 3 (Check In, Check Out) -->
-            <div class="row">
-              <div class="col-md-6">
-                <label for="check_in">Check In</label>
-                <input
-                  type="text"
-                  formControlName="check_in"
-                  id="check_in"
-                  class="form-control"
-                  placeholder="Enter Check In"
-                  [readonly]="isViewMode"
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="check_out">Check Out</label>
-                <input
-                  type="text"
-                  formControlName="check_out"
-                  id="check_out"
-                  class="form-control"
-                  placeholder="Enter Check Out"
-                  [readonly]="isViewMode"
-                />
-              </div>
-            </div>
+           
+           
   
             <!-- Row 4 (Work Hours) -->
             <div class="row">
@@ -184,6 +189,17 @@
                   id="work_hours"
                   class="form-control"
                   placeholder="Enter Work Hours"
+                  [readonly]="isViewMode"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="remarks">Remarks</label>
+                <input
+                  type="text"
+                  formControlName="remarks"
+                  id="remarks"
+                  class="form-control"
+                  placeholder="Enter remarks"
                   [readonly]="isViewMode"
                 />
               </div>
@@ -203,7 +219,7 @@
               class="btn btn-success"
               *ngIf="!isViewMode"
             >
-              {{ isEditMode ? 'Save Changes' : 'Add Employee' }}
+              {{ isEditMode ? 'Save Changes' : 'Add Attendence' }}
             </button>
           </div>
         </form>
