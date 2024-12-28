@@ -104,7 +104,7 @@ export class EmployeeProfileManagementComponent {
         salary: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
         employment_type: ['', [Validators.required]],
         status: ['', [Validators.required]],
-        Hire_dateStr: ['']
+        hireDateStr: ['', [Validators.required]]
     });
         
     //});
