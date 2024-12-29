@@ -2,6 +2,8 @@ import { Component, TemplateRef } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Holiday } from './model/Holiday.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-holiday-list',
@@ -9,23 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./holiday-list.component.css']
 })
 export class HolidayListComponent {
-
-  holidays = [
-    { holiday_name: 'Christmas', date: '25-12-2024', day: 'Tuesday', type: 'Public', region: 24 },
-    { holiday_name: 'New Year', date: '01-01-2024', day: 'Friday', type: 'Public', region: 16 },
-    { holiday_name: 'Pongal', date: '13-03-2024', day: 'Tuesday', type: 'Public', region: 18 },
-    { holiday_name: 'Sankranthi', date: '25-04-2024', day: 'Friday', type: 'Public', region: 10 },
-    { holiday_name: 'Republic Day', date: '25-05-2024', day: 'Saturday', type: 'Public', region: 16 },
-    { holiday_name: 'Good Friday', date: '03-06-2024', day: 'Wednesday', type: 'Public', region: 18 },
-    { holiday_name: 'Labour Day', date: '01-05-2024', day: 'Tuesday', type: 'Public', region: 13 },
-    { holiday_name: 'Thanks Giving Day', date: '25-11-2024', day: 'Friday', type: 'Public', region: 11 },
-    { holiday_name: 'Independence Day', date: '15-08-2024', day: 'Saturday', type: 'Public', region: 8 },
-    { holiday_name: 'Gandhi Jayanti', date: '02-08-2024', day: 'Sunday', type: 'Public', region: 9 },
-    { holiday_name: 'Diwali', date: '10-11-2024', day: 'Tuesday', type: 'Public', region: 10 },
-    { holiday_name: 'Ganesh Chaturthi', date: '09-12-2024', day: 'Monday', type: 'Public', region: 14 },
-    { holiday_name: 'Company Anniversary', date: '11-03-2024', day: 'Tuesday', type: 'Public', region: 17 },
-    { holiday_name: 'Festival', date: '30-12-2024', day: 'Monday', type: 'Public', region: 19 }
-  ];
+   private HOLIDAY_REST_API_BASE_URL = 'http://localhost:8080/api/holidays';  // URL to REST api
+    holidays: Holiday[] = []; // Array of holiday objects
+  
   modalRef: BsModalRef | null = null;
   addHolidayForm: FormGroup = this.fb.group({});
   isSubmitted = false;
@@ -39,10 +27,11 @@ export class HolidayListComponent {
     class: 'modal-md'
   };
 
-  constructor(private modalService: BsModalService, private fb: FormBuilder) {}
+  constructor(private modalService: BsModalService, private fb: FormBuilder,private http: HttpClient) {}
 
   ngOnInit() {
     this.initHolidayForm();
+    this.fetchAllHolidays();
   }
 
   initHolidayForm() {
@@ -52,7 +41,7 @@ export class HolidayListComponent {
       holiday_date: ['', [Validators.required]],
       region: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      is_recurring: ['', [Validators.required]],
+      is_recurring: ['', []],
       
       
     });
@@ -72,7 +61,9 @@ export class HolidayListComponent {
     if (holiday) {
       this.addHolidayForm.patchValue(holiday); // Populate form with holiday data
     } else {
-      this.addHolidayForm.reset();
+      this.addHolidayForm.reset
+      
+      ();
     }
 
     if (this.isViewMode) {
@@ -96,27 +87,94 @@ export class HolidayListComponent {
 
   addHoliday() {
     console.log('calling addHoliday', this.addHolidayForm.value);
-    // if (this.addHolidayForm.valid) {
-      this.holidays.push(this.addHolidayForm.value);
-      console.log('this.holidays', this.holidays);
-      this.closeCreateFormModal();
-    // }
+    
+        const holiday: Holiday = this.addHolidayForm.value as Holiday;
+        console.log('Form +Submitted and converted into holiday object', holiday);
+    
+        this.http
+        .post<Holiday>(this.HOLIDAY_REST_API_BASE_URL+"/add", holiday)
+        .subscribe(response => {
+             console.log('holiday saved successfully', response);
+             this.holidays.push(response);
+        });
+
+        this.holidays.push(holiday);
+          //console.log('this.employees', this.employees);
+          this.closeCreateFormModal();
+        // }
   }
+
 
   updateHoliday() {
-    if (this.addHolidayForm.valid && this.selectedHoliday) {
-      const index = this.holidays.findIndex(hol => hol === this.selectedHoliday);
-      if (index > -1) {
-        this.holidays[index] = this.addHolidayForm.value;
-        this.closeCreateFormModal();
+      console.log(this.selectedHoliday);
+
+       if (this.addHolidayForm.valid && this.selectedHoliday) {
+        const updatedHoliday: Holiday = {
+          ...this.selectedHoliday,
+          ...this.addHolidayForm.value
+        };
+    
+        this.http
+          .put<Holiday>(this.HOLIDAY_REST_API_BASE_URL+"/update", updatedHoliday) // Send the updated employee object
+          .subscribe(
+            response => {
+              const index = this.holidays.findIndex(holiday => holiday.id === updatedHoliday.id);
+    
+              if (index > -1) {
+                this.holidays[index] = response;
+              } else {
+                console.error('holiday not found in local array');
+              }
+            console.log("updated",updatedHoliday)
+    
+              this.closeCreateFormModal();
+            },
+            error => {
+              console.error('Error updating holiday:', error);
+            }
+          );
+      } else {
+        console.error('Form is invalid or selectedHoliday is missing');
       }
+    
+  }
+
+  onDelete(holiday: Holiday) {
+    console.log("deleting holiday : " , holiday);
+    const confirmDelete = confirm(`Are you sure want to remove ${holiday.holiday_name} from holiday list?`);
+    if (confirmDelete) {
+      
+      const options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        body: holiday,
+      };
+
+      this.http.delete<Holiday>(this.HOLIDAY_REST_API_BASE_URL+"/delete", options).subscribe(
+        data => {
+          console.log("after deleting the holiday, response from backend : " , data);
+          this.holidays = this.holidays.filter(hol => hol.holiday_name !== data.holiday_name);
+        }
+      )
+      
     }
   }
 
-  onDelete(holiday: any) {
-    const confirmDelete = confirm(`Are you sure want to remove ${holiday.holiday_name} from holiday list?`);
-    if (confirmDelete) {
-      this.holidays = this.holidays.filter(hol => hol !== holiday);
-    }
+  fetchAllHolidays() {
+    this.http
+        .get<Holiday[]>(this.HOLIDAY_REST_API_BASE_URL+"/fetchAll")
+        .subscribe(
+          data => {
+            this.holidays = data;
+            console.log('Holidays loaded successfully', this.holidays);
+          },
+          error => {
+            console.error('Error loading holidays', error);
+            // alert('Failed to load employees. Please try again later.');
+          }
+        );
+
+    this.holidays 
   }
 }

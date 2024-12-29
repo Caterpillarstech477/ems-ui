@@ -11,7 +11,7 @@
         <thead>
           <tr>
             <th>Date</th>
-            <th>Employee Name</th>
+            <th>attendanceReport Name</th>
             <th>Role</th>
             <th>Status</th>
             <th>Check In </th>
@@ -21,21 +21,18 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let employee of employees; index as i">
-            <td>{{ employee.date}}</td>
-            <td>{{ employee.employee_name }}</td>
-            <td>{{ employee.role}}</td>
-            <td>{{ employee.status}}</td>
-            <td>{{ employee.check_in}}</td>
-            <td>{{ employee.check_out}}</td>
-            <td>{{ employee.work_hours}}</td>
-            
-
-            
+          <tr *ngFor="let attendanceReport of attendanceReports; index as i">
+            <td>{{ attendanceReport.attendanceDate}}</td>
+            <td>{{ attendanceReport.employeeId }}</td>
+            <td>{{ attendanceReport.role}}</td>
+            <td>{{ attendanceReport.status}}</td>
+            <td>{{ attendanceReport.check_in}}</td>
+            <td>{{ attendanceReport.check_out}}</td>
+            <td>{{ attendanceReport.work_hours}}</td>
             <td>
               <div class="button-wrapper">
                 <button
-                  (click)="openCreateFormModal(AttedenceReportForm, 'view', employee)"
+                  (click)="openCreateFormModal(AttedenceReportForm, 'view', attendanceReport)"
                   mat-icon-button
                   color="primary"
                   class="btn-view"
@@ -47,7 +44,7 @@
   
               <div class="button-wrapper">
                 <button
-                  (click)="openCreateFormModal(AttedenceReportForm, 'edit', employee)"
+                  (click)="openCreateFormModal(AttedenceReportForm, 'edit', attendanceReport)"
                   mat-icon-button
                   color="accent"
                   class="btn-edit"
@@ -59,7 +56,7 @@
   
               <div class="button-wrapper">
                 <button
-                  (click)="onDelete(employee)"
+                  (click)="onDelete(attendanceReport)"
                   mat-icon-button
                   color="warn"
                   class="btn-delete"
@@ -82,7 +79,7 @@
           [formGroup]="attendenceReportForm"
           novalidate
           autocomplete="off"
-          (ngSubmit)="isEditMode ? updateBenefit() : addBenefit()"
+          (ngSubmit)="isEditMode ? updateAttendance() : makeAttendance()"
         >
           <div class="modal-header">
             <h4 class="modal-title">
@@ -99,27 +96,31 @@
           </div>
   
           <div class="modal-body">
-            <!-- Row 1 (Employee Name, Employee Type) -->
+            <!-- Row 1 (attendanceReport Name, attendanceReport Type) -->
             <div class="row">
                <div class="col-md-6">
-                <label for="employee_name">Employee Name</label>
-                <input
-                  type="text"
-                  formControlName="employee_name"
-                  id="employee_name"
-                  class="form-control"
-                  placeholder="Enter Employee Name"
-                  [readonly]="isViewMode"
-                />
-              </div>
+                
+                  <label for="email">email</label>
+                  <input
+                    type="text"
+                    formControlName="email"
+                    id="email"
+                    class="form-control"
+                    placeholder="Enter Employee Email"
+                    [readonly]="isViewMode"
+                  />
+                </div>
+        
+            <!-- </div> -->
+            
               <div class="col-md-6">
-                <label for="date">Date</label>
+                <label for="attendanceDate">Date</label>
                 <input
                   type="text"
-                  formControlName="date"
-                  id="date"
+                  formControlName="attendanceDate"
+                  id="attendanceDate"
                   class="form-control"
-                  placeholder="Enter Date"
+                  placeholder="Select Date"
                   [readonly]="isViewMode"
                 />
               </div>
@@ -159,7 +160,7 @@
                   formControlName="role"
                   id="role"
                   class="form-control"
-                  placeholder="Enter Employee Role"
+                  placeholder="Enter attendanceReport Role"
                   [readonly]="isViewMode"
                 />
               </div>
