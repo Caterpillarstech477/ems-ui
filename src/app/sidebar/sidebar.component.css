@@ -1,58 +1,103 @@
-/* Sidebar Container */
+/* Adjusted Sidebar General Styling */
+.main-layout {
+  display: flex;
+  height: 100vh;
+}
+
 .sidebar {
   width: 250px;
   height: 100vh;
-  background-color: #f4f6f9; /* Light grey background */
-  color: #11497a; /* Updated text color */
-  font-family: "Arial", sans-serif;
+  background-color: #f4f6f9;
+  color: #11497a;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Match the font from the image */
   padding: 15px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Sidebar Header */
 .sidebar-header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 20px; /* Space below the header */
+  margin-bottom: 20px;
 }
 
 .sidebar-logo {
-  width: 120px; /* Adjust logo size */
+  width: 120px;
   height: auto;
-  margin-bottom: 10px; /* Space between logo and title */
-  background: transparent;
+  margin-bottom: 10px;
 }
 
 .sidebar-title {
   font-size: 18px;
   font-weight: 800;
-  color:  #11497a;; /* Matching text color */
+  color: #11497a;
   letter-spacing: 1px;
   margin: 0;
-  text-transform: uppercase; /* Capitalize text */
+  text-transform: uppercase;
 }
 
-/* Menu Item */
+/* Menu Item Styling */
 .menu-item {
   cursor: pointer;
-  padding: 12px 15px;
+  padding: 10px 15px; /* Reduce padding slightly for a more compact look */
   display: flex;
   align-items: center;
   font-size: 14px;
   font-weight: 600;
-  color: #11497a; /* Text color */
-  border-radius: 8px;
+  color: #11497a;
+  border-radius: 6px; /* Slightly rounder corners */
   transition: background-color 0.3s, color 0.3s;
 }
 
 .menu-item:hover {
-  background-color: #e8f0fc; /* Light blue hover background */
-  color: #94ab64; /* Updated hover color */
+  background-color: #e8f0fc;
+  color: #94ab64;
+}
+
+/* Submenu Styling */
+.submenu {
+  list-style: none;
+  padding-left: 25px; /* Decreased left padding for submenu alignment */
+  margin: 0;
+  color: #94ab64;
+  
+}
+
+.submenu li {
+  padding: 6px 0; /* Reduce padding for a more compact submenu */
+}
+
+.submenu li a {
+  text-decoration: none;
+  color: #11497a;
+  font-size: 13px; /* Match the font size from the image */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  font-weight: 500; /* Match submenu weight */
+  transition: color 0.3s, background-color 0.3s;
+  padding-left: 10px; /* Reduced padding for alignment */
+}
+
+.submenu li a:hover {
+  color: #94ab64;
+  border-left: 2px solid #94ab64;
+}
+
+/* Active Submenu Item */
+.submenu li a.active {
+  background-color: #e8f0fc; /* Light blue background */
+  color: #94ab64; /* Active text color */
+  font-weight: bold; /* Bold text for active submenu */
+  border-left: 3px solid #94ab64; /* Highlighted left border */
+  padding-left: 8px; /* Adjust padding for alignment */
 }
 
 /* Dropdown Icon */
 .dropdown-icon {
-  margin-left: auto; /* Align dropdown icon to the right */
+  margin-left: auto;
   transition: transform 0.3s;
 }
 
@@ -60,51 +105,35 @@
   transform: rotate(180deg);
 }
 
-/* Submenu */
-.submenu {
-  list-style: none;
-  padding-left: 20px;
-  margin: 0;
-}
-
-.submenu li {
-  padding: 8px 0;
-}
-
-.submenu li a {
-  text-decoration: none;
-  color: #11497a; /* Updated submenu text color */
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s;
-  font-weight: 600;
-}
-
-.submenu li a:hover {
-  color: #94ab64; /* Hover color for submenu */
-}
-
 /* Icon Styling */
 .menu-item mat-icon,
 .submenu a mat-icon {
-  font-size: 20px; /* Icon size */
-  margin-right: 10px; /* Space between icon and text */
-  color: #94ab64; /* Updated icon color */
-  vertical-align: middle; /* Align icons with text */
+  font-size: 18px; /* Adjusted size for icons */
+  margin-right: 8px; /* Match alignment from the image */
+  color: #94ab64;
+  vertical-align: middle;
 }
 
 .menu-item:hover mat-icon,
 .submenu li a:hover mat-icon {
-  color: #94ab64; /* Icon hover color */
+  color: #94ab64;
 }
 
-/* Active Menu Item */
-.menu-item.active {
-  background-color: #e8f0fc; /* Light blue background for active menu */
-  color: #94ab64; /* Active text color */
+/* Logout Button Styling */
+.logout-btn {
+  display: block;
+  width: 75%;
+  padding: 10px;
+  margin: 20px auto;
+  background-color: #94ab64;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
 }
 
-.menu-item.active mat-icon {
-  color: #94ab64; /* Active icon color */
+.logout-btn:hover {
+  background-color: #14581A;
 }

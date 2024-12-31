@@ -13,7 +13,6 @@
             <th>S.No</th>
             <th>Holiday Name</th>
             <th>Date</th>
-            <th>Day</th>
             <th>Holiday Type</th>
             <th>Region/Dept</th>
             <th>Action</th>
@@ -23,9 +22,8 @@
           <tr *ngFor="let holiday of holidays; index as i">
             <td>{{ i + 1 }}</td>
             <td>{{ holiday.holiday_name}}</td>
-            <td>{{ holiday.date }}</td>
-            <td>{{ holiday.day }}</td>
-            <td>{{ holiday.type }}</td>
+            <td>{{ holiday.holiday_date }}</td>
+            <td>{{ holiday.holiday_type }}</td>
             <td>{{ holiday.region }}</td>
             <td>
               <div class="button-wrapper">
@@ -100,10 +98,9 @@
                   class="form-control"
                   [disabled]="isViewMode"
                 >
-                <option value="" disabled selected>Select Type</option>
-                  <option value="">Public</option>
-                  <option value="">Company</option>
-                  <option value="">Others</option>
+                  <option value="Public">Public</option>
+                  <option value="Company">Company</option>
+                  <option value="Others">Others</option>
                 </select>
               </div>
           </div>

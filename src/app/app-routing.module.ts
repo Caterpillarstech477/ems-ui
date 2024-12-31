@@ -26,6 +26,7 @@ import { ProjectReportComponent } from './projects/project-report/project-report
 import { ProjectAssignmentComponent } from './projects/project-assignment/project-assignment.component';
 import { ProjectDocumentationComponent } from './projects/project-documentation/project-documentation.component';
 import { ProjectBudgetComponent } from './projects/project-budget/project-budget.component';
+import { ProjectReportDocumentComponent } from './projects/project-report-document/project-report-document.component';
 // Asset Management
 import { AssetReportComponent } from './asset-management/asset-report/asset-report.component';
 import { AssetAssignmentComponent } from './asset-management/asset-assignment/asset-assignment.component';
@@ -35,6 +36,7 @@ import { AddAlertsNotificationsComponent } from './alerts-notifications/add-aler
 import { AlertsAndNotificationReportComponent } from './alerts-notifications/alerts-and-notification-report/alerts-and-notification-report.component';
 //login
 import { LoginComponent } from './login/login.component';
+
 const routes: Routes = [
   // Default route (Login page)
   { path: '', component: LoginComponent },
@@ -68,6 +70,7 @@ const routes: Routes = [
   { path: 'project-assignment', component: ProjectAssignmentComponent },
   { path: 'project-documentation', component: ProjectDocumentationComponent },
   { path: 'project-budget', component: ProjectBudgetComponent },
+  {path: 'project-report-document',component:ProjectReportDocumentComponent},
 
   // Asset Management routes
   { path: 'asset-report', component: AssetReportComponent },

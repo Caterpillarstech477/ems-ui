@@ -269,6 +269,23 @@
   .modal-header .close {
     display: none; /* Hide the close icon */
   }
+  .btn-danger {
+    background-color: #b91d1d;
+    border: none;
+    padding: 12px 20px; /* Increase padding for bigger buttons */
+    font-size: 14px; /* Increase font size */
+    border-radius: 12px; 
+    color:white/* Add rounded corners */
+  }
+  
+  .btn-success {
+    background-color: #809f3d;
+    border: none;
+    padding: 12px 20px; /* Increase padding for bigger buttons */
+    font-size: 14px; /* Increase font size */
+    border-radius: 12px;
+    color:white /* Add rounded corners */
+  }
   
   .btn-warning {
     background-color: #073863;

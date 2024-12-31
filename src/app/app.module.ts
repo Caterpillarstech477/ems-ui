@@ -43,7 +43,8 @@ import { EmployeeProfileManagementComponent } from './employee-management/employ
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HrPoliciesComponent } from './hr-policies/hr-policies/hr-policies.component';
-import { AddHrPolicyComponent } from './hr-policies/add-hr-policy/add-hr-policy.component'; 
+import { AddHrPolicyComponent } from './hr-policies/add-hr-policy/add-hr-policy.component';
+import { ProjectReportDocumentComponent } from './projects/project-report-document/project-report-document.component'; 
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { AddHrPolicyComponent } from './hr-policies/add-hr-policy/add-hr-policy.
     EmployeeProfileManagementComponent,
     LoginComponent,
     HrPoliciesComponent,
-    AddHrPolicyComponent
+    AddHrPolicyComponent,
+    ProjectReportDocumentComponent
   ],
   imports: [
     BrowserModule,
