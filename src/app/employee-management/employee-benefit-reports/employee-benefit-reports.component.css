@@ -17,9 +17,9 @@
 
 .header-and-filters {
   display: flex;
-  justify-content: space-between; /* Distributes space between items */
-  align-items: center;           /* Vertically centers items */
-  margin-bottom: 20px;           /* Adds space below the row */
+  justify-content: space-between; 
+  align-items: center;          
+  margin-bottom: 20px;           
 }
 
 .table-container {
@@ -124,7 +124,7 @@ button[mat-icon-button]:hover {
   margin-top: 5px;
 }
 
-/* add asset form styles */
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -134,8 +134,8 @@ button[mat-icon-button]:hover {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center the modal */
-  max-width: 90%; /* Adjust modal width */
+  transform: translate(-50%, -50%); 
+  max-width: 90%; 
   margin-left: 0; 
   padding-top: 10px;
 }
@@ -143,30 +143,24 @@ modal-body {
   flex: 1;
   overflow-y: auto;
   max-height: calc(80vh - 60px);
-  background-color: #f7f7f7; /* Light gray background */
-  padding: 20px; /* Optional: Add padding to the form */
-  border-radius: 8px; /* Optional: Round the corners */
+  background-color: #f7f7f7; 
+  padding: 20px; 
+  border-radius: 8px; 
 }
 
-/* Optional: Add a shadow effect to the modal for a more distinct look */
+
 .modal-content {
   width: 100%;
-  background-color: #fff; /* White background for the modal */
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow for the modal */
+  background-color: #fff; 
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); 
 }
 
-/* .modal-content {
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  height: 75vh;
-  padding: 0;
-} */
+
 
 .modal-header {
   padding: 12px;
   display: flex;
-  justify-content: flex-start; /* Align heading to the left */
+  justify-content: flex-start;
   background-color: #f1f1f1;
 }
 
@@ -191,19 +185,19 @@ modal-body {
   width: 100%;
   padding: 6px;
   font-size: 12px;
-  border: 1px solid #cfcfcf; /* Set border color */
+  border: 1px solid #cfcfcf; 
   box-sizing: border-box;
 }
 
 label {
   font-weight: bold;
   font-size: 12px;
-  color: #555555; /* Set label color */
+  color: #555555; 
 }
 
 .modal-footer {
   display: flex;
-  justify-content: flex-start; /* Align buttons to the left */
+  justify-content: flex-start; 
   gap: 10px;
   padding: 8px 15px;
   background-color: #f8f9fa;
@@ -259,7 +253,7 @@ label {
 }
 
 .modal-header .close {
-  display: none; /* Hide the close icon */
+  display: none;
 }
 .btn-danger {
   background-color: #b91d1d;
@@ -275,7 +269,7 @@ label {
   background-color: #073863;
   border: none;
 }
-/* search bar */
+
 .header-and-filters {
   margin-bottom: 1rem;
 }
@@ -289,9 +283,9 @@ label {
 }
 
 .search-input {
-  width: 100%; /* Ensure input takes the full width of its container */
+  width: 100%; 
   padding: 0.5rem;
-  padding-right: 30px; /* Space for the icon on the right */
+  padding-right: 30px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
@@ -299,13 +293,13 @@ label {
 
 .search-icon {
   position: absolute;
-  right: 10px; /* Align the icon to the right inside the input */
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: #888; /* Adjust color of the icon */
+  color: #888; 
 }
 
-/* Table styles */
+
 .table-container table {
   width: 100%;
   margin-top: 1rem;
@@ -328,34 +322,34 @@ label {
   align-items: center;
   margin-right: 0.5rem;
 }
-/* Modal styles */
+
 .overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 999; /* Behind the modal but above other content */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
   display: block;
 }
 
 .modal-dialog {
-  position: fixed; /* Ensure modal is in a fixed position */
+  position: fixed; 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 90%;
-  z-index: 1000; /* Ensure modal is above the overlay */
+  z-index: 1000;
   margin-left: 0;
   padding-top: 10px;
 }
 
 .modal-content {
-  position: relative; /* Ensure content is above overlay */
+  position: relative; 
   background-color: #fff;
   width: 100%;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow for the modal */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 

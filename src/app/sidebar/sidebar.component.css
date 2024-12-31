@@ -1,14 +1,15 @@
-/* General Styling for Sidebar */
+/* Adjusted Sidebar General Styling */
 .main-layout {
   display: flex;
   height: 100vh;
 }
+
 .sidebar {
   width: 250px;
   height: 100vh;
   background-color: #f4f6f9;
   color: #11497a;
-  font-family: Arial, Helvetica, sans-serif;;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Match the font from the image */
   padding: 15px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -40,13 +41,13 @@
 /* Menu Item Styling */
 .menu-item {
   cursor: pointer;
-  padding: 12px 15px;
+  padding: 10px 15px; /* Reduce padding slightly for a more compact look */
   display: flex;
   align-items: center;
   font-size: 14px;
   font-weight: 600;
   color: #11497a;
-  border-radius: 8px;
+  border-radius: 6px; /* Slightly rounder corners */
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -58,37 +59,31 @@
 /* Submenu Styling */
 .submenu {
   list-style: none;
-  padding-left: 20px;
+  padding-left: 25px; /* Decreased left padding for submenu alignment */
   margin: 0;
+  color: #94ab64;
+  
 }
 
 .submenu li {
-  padding: 8px 0;
+  padding: 6px 0; /* Reduce padding for a more compact submenu */
 }
 
 .submenu li a {
   text-decoration: none;
   color: #11497a;
-  font-size: 14px;
+  font-size: 13px; /* Match the font size from the image */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
-  font-weight: 600;
+  font-weight: 500; /* Match submenu weight */
   transition: color 0.3s, background-color 0.3s;
+  padding-left: 10px; /* Reduced padding for alignment */
 }
 
 .submenu li a:hover {
   color: #94ab64;
-}
-
-/* Active Menu Item */
-.menu-item.active {
-  background-color: #e8f0fc; /* Light blue background */
-  color: #94ab64; /* Active text color */
-  font-weight: bold; /* Bold text for active menu */
-}
-
-.menu-item.active mat-icon {
-  color: #94ab64; /* Icon color for active menu */
+  border-left: 2px solid #94ab64;
 }
 
 /* Active Submenu Item */
@@ -96,8 +91,8 @@
   background-color: #e8f0fc; /* Light blue background */
   color: #94ab64; /* Active text color */
   font-weight: bold; /* Bold text for active submenu */
-  border-left: 4px solid #94ab64; /* Highlighted left border */
-  padding-left: 12px; /* Adjust padding for alignment */
+  border-left: 3px solid #94ab64; /* Highlighted left border */
+  padding-left: 8px; /* Adjust padding for alignment */
 }
 
 /* Dropdown Icon */
@@ -113,8 +108,8 @@
 /* Icon Styling */
 .menu-item mat-icon,
 .submenu a mat-icon {
-  font-size: 20px;
-  margin-right: 10px;
+  font-size: 18px; /* Adjusted size for icons */
+  margin-right: 8px; /* Match alignment from the image */
   color: #94ab64;
   vertical-align: middle;
 }
@@ -124,92 +119,7 @@
   color: #94ab64;
 }
 
-/* top bar css */
-/* Top Bar */
-.top-bar {
-  flex: 1;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 20px;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Profile Section */
-.profile-section {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.notification-icon {
-  font-size: 24px;
-  color: #94ab64;
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-.profile-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 15px;
-  width: 200px;
-}
-
-.profile-info {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 15px;
-}
-
-.user-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.username {
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.user-role {
-  font-size: 14px;
-  color: #777;
-}
-
-.profile-button,
-.signout-button {
-  width: 100%;
-  background-color: #11497a;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-.profile-button:hover,
-.signout-button:hover {
-  background-color: #94ab64;
-}
+/* Logout Button Styling */
 .logout-btn {
   display: block;
   width: 75%;

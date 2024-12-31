@@ -258,3 +258,20 @@ label {
 .modal-header .close {
   display: none;
 }
+.terms-content {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.terms-content h5 {
+  margin-top: 0;
+}
+
+.terms-content label {
+  font-size: 14px;
+  display: inline-block;
+  margin-top: 10px;
+}

@@ -17,8 +17,8 @@ export class EmployeeProfileManagementComponent {
   // employees = [
   //   // Hardcoded employee data (you can add more)
   //   {
-  //     first_name: 'Ravi',
-  //     last_name: 'Kumar',
+  //     firstname: 'Ravi',
+  //     lastname: 'Kumar',
   //     gender: 'Male',
   //     dob: '1985-06-15',
   //     mobile_number: '9988776655',
@@ -27,12 +27,12 @@ export class EmployeeProfileManagementComponent {
   //     address: '123 Main St, City',
   //     city: 'Chennai',
   //     state: 'Tamil Nadu',
-  //     postal_code: '600001',
+  //     postalcode: '600001',
   //     country: 'India',
-  //     job_title: 'Manager',
-  //     ni_number: 'NI123456',
+  //     jobtitle: 'Manager',
+  //     ninumber: 'NI123456',
   //     salary: '60000',
-  //     employment_type: 'Full-time',
+  //     employmenttype: 'Full-time',
   //     employment_status: 'Active',
   //     hiring_date: '2010-03-25'
   //   }
@@ -53,6 +53,8 @@ export class EmployeeProfileManagementComponent {
   };
   public getJsonValue:any
   public postJsonValue:any
+  termsVisible: boolean = false;
+  isAgreed: boolean = false;
 
   constructor(private modalService: BsModalService, private fb: FormBuilder,private http: HttpClient) {}
 
@@ -87,24 +89,24 @@ export class EmployeeProfileManagementComponent {
   initEmployeeForm() {
     
       this.addEmployeeForm = this.fb.group({
-        first_name: ['', [Validators.required]],
-        last_name: ['', [Validators.required]],
+        firstName: ['', [Validators.required]],
+        lastName: ['', [Validators.required]],
         gender: ['', [Validators.required]],
-        date_of_birth: ['', [Validators.required]],
+        dob: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        phone_number: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-        emergency_phone: ['', [Validators.pattern('^[0-9]*$')]],
+        phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        emergencyPhone: ['', [Validators.pattern('^[0-9]*$')]],
         address: ['', [Validators.required]],
         city: ['', [Validators.required]],
         state: ['', [Validators.required]],
-        postal_code: ['', [Validators.required]],
+        postalCode: ['', [Validators.required]],
         country: ['', [Validators.required]],
-        job_title: ['', [Validators.required]],
-        ni_number: ['', [Validators.required]],
+        jobTitle: ['', [Validators.required]],
+        niNumber: ['', [Validators.required]],
         salary: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-        employment_type: ['', [Validators.required]],
+        employmentType: ['', [Validators.required]],
         status: ['', [Validators.required]],
-        Hire_dateStr: ['']
+        hireDate: ['']
     });
         
     //});
@@ -113,6 +115,7 @@ export class EmployeeProfileManagementComponent {
   get f() {
     return this.addEmployeeForm.controls;
   }
+  
 
   openCreateFormModal(template: TemplateRef<any>, type: string = '', employee: any = null) {
     this.modalRef = this.modalService.show(template, this.config);
@@ -149,6 +152,7 @@ export class EmployeeProfileManagementComponent {
     this.http.get<Employee[]>(this.EMPLOYEE_REST_API_URL).subscribe(
       data => {
         this.employees = data;
+        
         console.log('Employees loaded successfully', this.employees);
       },
       error => {
@@ -176,6 +180,9 @@ export class EmployeeProfileManagementComponent {
 
       this.closeCreateFormModal();
     // }
+  }
+  showTermsAndPolicies() {
+    this.termsVisible = !this.termsVisible;
   }
 
   // updateEmployee() {
@@ -225,13 +232,13 @@ export class EmployeeProfileManagementComponent {
   
 
   // onDelete(employee: any) {
-  //   const confirmDelete = confirm(`Are you sure you want to delete ${employee.first_name} ${employee.last_name}?`);
+  //   const confirmDelete = confirm(`Are you sure you want to delete ${employee.firstname} ${employee.lastname}?`);
   //   if (confirmDelete) {
   //     this.employees = this.employees.filter(emp => emp !== employee);
   //   }
   // }
   onDelete(employee: Employee) {
-    const confirmDelete = confirm(`Are you sure you want to delete ${employee.first_name} ${employee.last_name}?`);
+    const confirmDelete = confirm(`Are you sure you want to delete ${employee.firstName} ${employee.lastName}?`);
     if (confirmDelete) {
       this.http.delete(`${this.EMPLOYEE_REST_API_URL}/${employee.employeeId}`).subscribe(
         () => {
