@@ -1,10 +1,19 @@
 <div class="content-wrapper">
   <div class="header-and-filters">
     <h1 class="main-heading">Leave Request Report</h1>
+    <div class="export-section">
+      <label for="export-type">Export</label>
+      <select id="export-type" (change)="onExport($event)">
+        <option value="" disabled selected>Select Type</option>
+        <option value="excel">Excel file</option>
+        <option value="pdf">PDF file</option>
+        <option value="print">Print</option>
+      </select>
+    </div>
     </div>
 
-  <div class="table-container">
-    <table>
+  <div id="table-container" class="table-container">
+    <table id="leaveTable">
       <thead>
         <tr>
           <th>S.NO</th>
@@ -14,7 +23,7 @@
           <th>Role</th>
           <th>Leave Type</th>
           <th>Status</th>
-          <th>Action</th>
+          <th class="no-print">Action</th>
           </tr>
       </thead>
       <tbody>
@@ -26,10 +35,7 @@
           <td>{{ employee.role}}</td>
           <td>{{ employee.leave_type}}</td>
           <td>{{ employee.status}}</td>
-          
-
-          
-          <td>
+           <td class="no-print">
             <div class="button-wrapper">
               <button
                 (click)="openCreateFormModal(LeaveRequestForm, 'view', employee)"
@@ -72,6 +78,7 @@
   </div>
 </div>
 
+<div *ngIf="isModalOpen" class="overlay"></div>
 <ng-template #LeaveRequestForm>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

@@ -1,110 +1,82 @@
 
 <div class="content-wrapper">
     <div class="header-and-filters">
-      <h1 class="main-heading">ADD ALERTS & NOTIFICATIONS</h1>
+      <h1 class="main-heading">Add Alerts & Notifications</h1>
     </div>
-  <div class="container">
-    <div class="form-container">
-        <form #alertForm="ngForm" (ngSubmit)="onSubmit(alertForm)">
-          <!-- Alert Type -->
-         
-          <div class="form-group">
-            <div class="form-field">
+    <form [formGroup]="addAlertForm" novalidate autocomplete="off" (ngSubmit)="onSubmit()" class="styled-form">
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
             <label for="alertType">Alert Type</label>
-            <select id="alertType" name="alertType" [(ngModel)]="alertData.alertType" required>
-              <option value="" disabled selected>Select Type</option>
-              <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
-            </select>
+            <select formControlName="alertType" id="alertType" class="form-control"
+              name="alertType"  required>
+                <option value="" disabled selected>Select Type</option>
+                <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
+              </select>
           </div>
-          <div class="form-field">
+          <div class="col-md-6">
             <label for="alertMessage">Alert Message</label>
-            <select id="alertMessage" name="alertMessage" [(ngModel)]="alertData.alertMessage" required>
+            <select formControlName="alertMessage" id="alertMessage" class="form-control"
+            name="alertMessage"  required>
               <option value="" disabled selected>Select Type</option>
-              <option *ngFor="let Message of alertMessages" [value]="Message">{{ Message }}</option>
+              <option *ngFor="let message of alertMessages" [value]="message">{{ message }}</option>
             </select>
           </div>
-         
-       
-          
-          <!-- Alert Message
-          <div class="form-group">
-            <label for="alertMessage">Alert Message</label>
-            <input type="text" id="alertMessage" name="alertMessage"
-              [(ngModel)]="alertData.alertMessage"
-              required/>
-          </div> -->
-      
-          <!-- Employee Name -->
-          <div class="form-field">
-            <label for="employeeName">Employee Name</label>
-            <select id="employeeName" name="employeeName" [(ngModel)]="alertData.employeeName" required>
-              <option value="" disabled selected>Select Type</option>
-              <option *ngFor="let Name of employeeNames" [value]="Name">{{ Name }}</option>
-            </select>
-          </div>
-          
-          <!-- <div class="form-group">
+        </div>
+         <!-- Row 2 (Employee Name, End Date) -->
+         <div class="row">
+          <div class="col-md-6">
             <label for="employeeName">Employee Name</label>
             <input
-              type="text"
-              id="employeeName"
-              name="employeeName"
-              [(ngModel)]="alertData.employeeName"
-              required
-            />
-          </div> -->
-      
-          <!-- Is Read -->
-          
-          <div class="form-field">
+            type="text"
+            formControlName="employeeName"
+            id="employeeName"
+            class="form-control"
+            placeholder="Enter Employee Name"
+          />
+          </div>
+          <div class="col-md-6">
             <label for="isRead">Is Read?</label>
-            <select id="isRead" name="isRead" [(ngModel)]="alertData.isRead" required>
+            <select
+            formControlName="isRead"  id="isRead" 
+            class="form-control"
+            name="isRead"  required>
               <option value="" disabled selected>Select</option>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
           </div>
-      
-          <!-- Priority Level -->
-          <div class="form-field">
-            <label for="priorityLevel">Priority Level</label>
-            <select id="priorityLevel" name="priorityLevel" [(ngModel)]="alertData.priorityLevel" required>
-              <option value="" disabled selected>Select Type</option>
-              <option *ngFor="let priority of priorityLevels" [value]="priority">{{ priority }}</option>
-            </select>
-          </div>
-          <!-- <div class="form-group">
-            <label for="priorityLevel">Priority Level</label>
-            <input type="text" id="priorityLevel" name="priorityLevel"
-              [(ngModel)]="alertData.priorityLevel"
-              required
-            />
-          </div> -->
-      
-          <!-- Expires At -->
-          <div class="form-field">
-            <label for="expiresAt">Expires At</label>
-            <input
-              type="datetime-local"
-              id="expiresAt"
-              name="expiresAt"
-              [(ngModel)]="alertData.expiresAt"
-              required
-            />
-          </div>
-          </div>
-       
-      
-          <!-- Buttons -->
-          <div class="button-group">
-            <button type="button" (click)="addMore()" class="btnAdd">Add More</button>
-            <button type="submit" class="btnSave">Save and Exit</button>
-          </div>
-        
-      </form>
-   
+        </div>
+     
+
+       <!-- Row 2 (Priority Level, Expires At) -->
+       <div class="row">
+        <div class="col-md-4">
+          <label for="priorityLevel">Priority Level</label>
+          <select formControlName="priorityLevel" id="priorityLevel" class="form-control"
+          name="priorityLevel"  required>
+            <option value="" disabled selected>Select Type</option>
+            <option *ngFor="let priority of priorityLevels" [value]="priority">{{ priority }}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="expiresAt">Expires At</label>
+          <input
+            type="datetime-local"
+            formControlName="expiresAt"
+            id="expiresAt"
+            name="expiresAt"
+            class="form-control" required
+          />
+        </div>
       </div>
     </div>
-      
+
+     <!-- Modal Footer -->
+     <div class="modal-footer">
+      <button type="button" class="add-more" (click)="addMore()">Add More</button>
+      <button type="submit" class="save-and-exit ">Save and Exit</button>
+
   
 

@@ -24,6 +24,8 @@ export class ProjectReportComponent {
 
   modalRef: BsModalRef | null = null;
   projectForm!: FormGroup;
+  isSubmitted=false;
+  isModalOpen=false;
   isViewMode = false;
   isEditMode = false;
   selectedProject: any = null;
@@ -61,6 +63,7 @@ export class ProjectReportComponent {
   // Open the modal for adding, editing or viewing projects
   openCreateFormModal(template: TemplateRef<any>, type: string = '', project: any = null) {
     this.modalRef = this.modalService.show(template, this.config);
+    this.isModalOpen = true;
     this.isViewMode = type === 'view';
     this.isEditMode = type === 'edit';
     this.selectedProject = project;
@@ -84,6 +87,8 @@ export class ProjectReportComponent {
       this.modalRef.hide();
       this.modalRef = null;
     }
+    this.isSubmitted = false;
+    this.isModalOpen = false;
     this.isViewMode = false;
     this.isEditMode = false;
     this.selectedProject = null;

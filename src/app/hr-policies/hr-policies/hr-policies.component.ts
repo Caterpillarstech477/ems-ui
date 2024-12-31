@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+
 @Component({
   selector: 'app-hr-policies',
   templateUrl: './hr-policies.component.html',
@@ -22,6 +23,8 @@ export class HrPoliciesComponent {
 
   modalRef: BsModalRef | null = null;
   hrPolicyForm!: FormGroup;
+  isSubmitted=false;
+  isModalOpen=false;
   isViewMode = false;
   isEditMode = false;
   selectedPolicy: any = null;
@@ -55,6 +58,7 @@ export class HrPoliciesComponent {
   // Open the modal for adding, editing or viewing policies
   openCreateFormModal(template: TemplateRef<any>, type: string = '', policy: any = null) {
     this.modalRef = this.modalService.show(template, this.config);
+    this.isModalOpen = true;
     this.isViewMode = type === 'view';
     this.isEditMode = type === 'edit';
     this.selectedPolicy = policy;
@@ -78,6 +82,8 @@ export class HrPoliciesComponent {
       this.modalRef.hide();
       this.modalRef = null;
     }
+    this.isSubmitted = false;
+    this.isModalOpen = false;
     this.isViewMode = false;
     this.isEditMode = false;
     this.selectedPolicy = null;

@@ -3,144 +3,208 @@
     padding: 10px;
     box-sizing: border-box;
 }
-.container{
-    margin-left: 40px;
-    border: 1px solid #cfcfcf;
-    background: #fff;
-    padding: 10px 30px;
-    border-radius: 10px;
-    box-shadow: none;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
-    width: 800px;
-    text-align: left;
-    justify-content: space-between;
-    box-sizing: border-box;
-    
-}
-
-
-/* .form-container {
-    margin-left: 40px;
-    padding: 20px;
-    justify-content: space-between;
-    box-sizing: border-box;
-    border-radius: 10px;
-} */
-.form-group{
-    /* padding: 5px; */
-    display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-bottom: 10px;
-}
-.form-group .form-field {
-    width: 48%;
-    margin-bottom: 15px;
-  }
-
-  label {
-    display: block;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-  }
-
-.form-group input{
-    width: 100%;
-    padding: 8px 10px;
-    font-size: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .form-group select{
-    width: 100%;
-    padding: 8px 10px;
-    font-size: 12px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .button-group {
-    display: flex; /* Aligns buttons horizontally */
-    gap: 60px; /* Adds space between buttons */
-    justify-content: center; /* Centers the buttons horizontally */
-    margin-top: 20px; /* Adds space above the button group */
-    
-  }
-  
-  .button-group button {
-    padding: 10px 20px; /* Increases the clickable area */
-    font-size: 16px; /* Adjusts the font size for readability */
-    border: none; /* Removes default button border */
-    border-radius: 10px; /* Adds rounded corners */
-    cursor: pointer; /* Changes cursor to pointer on hover */
-    transition: background-color 0.3s ease; /* Adds a hover effect */
-  }
-  
-  .button-group .btnAdd {
-    background-color: #809f3d; /* Green background */
-    color: white; /* White text */
-  }
-  
-  .button-group .btnAdd:hover {
-    background-color: #40660b;; /* Darker green on hover */
-  }
-  
-  .button-group .btnSave {
-    background-color:brown; 
-    color: white; /* White text */
-  }
-  
-  .button-group .btnSave:hover {
-    background-color: #602008; /* Darker blue on hover */
-  }
-  
-.header-and-filters {
-    display: flex;
-    justify-content: space-between; /* Distributes space between items */
-    align-items: center;           /* Vertically centers items */
-    margin-bottom: 20px;           /* Adds space below the row */
-  }
 
 .main-heading {
-    font-size: 24px;
-    color: #7ca045;
-    font-weight: 500;
-    margin-left: 40px;
-    flex: 1;
+  font-size: 24px;
+  color: #7ca045;
+  font-weight: 500;
+  margin-left: 40px;
+  flex: 1;
 }
 
-button[mat-icon-button] {
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    margin: 0 8px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    padding: 0;
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+.form-control {
+  width: 100%;
+  padding: 6px;
+  font-size: 12px;
+  border: 1px solid #cfcfcf;
+  box-sizing: border-box;
 }
 
-button[mat-icon-button] mat-icon {
-    color: white;
-    font-size: 18px;
+label {
+  font-weight: bold;
+  font-size: 12px;
+  color: #555555;
 }
 
-button[mat-icon-button]:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.modal-footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 8px 15px;
+  background-color:  #ffffff;;
 }
 
-
-.btn:hover {
-    opacity: 0.9;
+.btn {
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.add-more {
+  background-color: #809f3d;
+  border: none;
+  color: white;
+  padding: 10px 20px; /* Increase padding for larger buttons */
+  font-size: 16px; /* Increase font size */
+  text-align: center; /* Center-align text */
+  border-radius: 10px; /* Rounded corners */
+  display: inline-block; /* Ensure the button behaves like a block element */
+  cursor: pointer; /* Add pointer cursor on hover */
 }
 
-.button-wrapper {
-    display: inline-block;
-    text-align: center;
-    margin-right: 8px;
+.save-and-exit {
+  background-color: #b91d1d;
+  border: none;
+  color: white;
+  padding: 10px 20px; /* Increase padding for larger buttons */
+  font-size: 16px; /* Increase font size */
+  text-align: center; /* Center-align text */
+  border-radius: 10px; /* Rounded corners */
+  display: inline-block; /* Ensure the button behaves like a block element */
+  cursor: pointer; /* Add pointer cursor on hover */
 }
 
+/* Optional: Add hover effects for better user interaction */
+.add-more:hover {
+  background-color: #708c2b; /* Slightly darker shade */
+}
+
+.save-and-exit:hover {
+  background-color: #a11f1f; /* Slightly darker shade */
+}
+
+ 
+.btn-warning {
+  background-color: #f0ad4e;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #6f8e2f;
+}
+
+.btn-warning:hover {
+  background-color: #f39c12;
+}
+
+button[type="file"] {
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+button[type="file"]:hover {
+  background-color: #e1e1e1;
+}
+.modal-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the modal */
+  max-width: 90%; /* Adjust modal width */
+  margin-left: 0; 
+  padding-top: 10px;
+}
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(80vh - 60px);
+  background-color: #ffffff; /* Light gray background */
+  padding: 20px; /* Optional: Add padding to the form */
+  border-radius: 8px; /* Optional: Round the corners */
+}
+
+/* Optional: Add a shadow effect to the modal for a more distinct look */
+.modal-content {
+  width: 100%;
+  background-color: #fff; /* White background for the modal */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow for the modal */
+}
+
+.modal-header {
+  padding: 12px;
+  display: flex;
+  justify-content: flex-start; /* Align heading to the left */
+  background-color: #f1f1f1;
+}
+
+.modal-header .modal-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #94ab64;
+}
+
+.modal-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: calc(75vh - 80px);
+}
+.btn-danger {
+  background-color: #b91d1d;
+  border: none;
+}
+
+.btn-success {
+  background-color:#809f3d;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #f0ad4e;
+  border: none;
+}
+
+.modal-body .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modal-body .row > div {
+  padding-right: 10px;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.modal-body .col-md-6 {
+  width: 48%;
+}
+
+.modal-body .col-md-4 {
+  width: 48%;
+}
+
+.modal-body .row div {
+  flex-grow: 1;
+}
+
+.modal-body .form-control {
+  font-size: 12px;
+}
+
+.modal-header .close {
+  display: none; /* Hide the close icon */
+}
+
+/* form border */
+.styled-form {
+  border: 1px solid #ced4da;
+  border-radius: 8px; 
+  padding: 20px; 
+  margin: 20px auto; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.styled-form .form-control {
+  border-radius: 4px; 
+}

@@ -26,6 +26,8 @@ export class AssetReportComponent {
 
   modalRef: BsModalRef | null = null;
   assetForm!: FormGroup;
+  isSubmitted=false;
+  isModalOpen=false;
   isViewMode = false;
   isEditMode = false;
   selectedAsset: any = null;
@@ -65,6 +67,7 @@ export class AssetReportComponent {
   // Open the modal for adding, editing or viewing assets
   openCreateFormModal(template: TemplateRef<any>, type: string = '', asset: any = null) {
     this.modalRef = this.modalService.show(template, this.config);
+    this.isModalOpen = true;
     this.isViewMode = type === 'view';
     this.isEditMode = type === 'edit';
     this.selectedAsset = asset;
@@ -88,6 +91,8 @@ export class AssetReportComponent {
       this.modalRef.hide();
       this.modalRef = null;
     }
+    this.isSubmitted = false;
+    this.isModalOpen = false;
     this.isViewMode = false;
     this.isEditMode = false;
     this.selectedAsset = null;

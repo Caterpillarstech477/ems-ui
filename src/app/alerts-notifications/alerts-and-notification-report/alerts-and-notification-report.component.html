@@ -1,12 +1,24 @@
 <div class="content-wrapper">
   <div class="header-and-filters">
     <h1 class="main-heading">Alerts & Notification Report</h1>
-    <div class="filter-group">
+  <div class="export-section">
+    <label for="export-type">Export</label>
+    <select id="export-type" (change)="onExport($event)">
+      <option value="" disabled selected>Select Type</option>
+      <option value="excel">Excel file</option>
+      <option value="pdf">PDF file</option>
+      <option value="print">Print</option>
+    </select>
+  </div>
+    
+  </div>
+    <!-- < class="filter-group">
       <button class="add-alert-btn">ADD ALERT</button>
 
-      <div class="filter-item">
+       <div class="filter-item">
+        
+        <label for="start-date">Date Range</label>
         <div class="date-range">
-          <label for="start-date">Date Range</label>
         <input type="text" id="start-date" placeholder="Start Date"
         [(ngModel)]="startDate" ngbDatepicker #startDatePicker="ngbDatepicker"
         (click)="startDatePicker.toggle()" readonly />
@@ -15,74 +27,18 @@
         (click)="endDatePicker.toggle()" readonly/>
         </div>
         
-      </div>
+      </div> 
     
-      <div class="filter-item">
+        <div class="filter-item">
         <label for="alert-type">Alert Type</label>
         <select id="alert-type" [(ngModel)]="selectedAlertType">
         <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
         </select>
-      </div>
-        
-      <div class="filter-item">
-        <label for="export-type">Export Type</label>
-        <select id="export-type" [(ngModel)]="selectedExportType">
-        <option *ngFor="let type of exportTypes" [value]="type">{{ type }}</option>
-        </select> 
-      </div>
-    </div>
-  </div>
-
-
-    <!-- <div class="header-and-filters"> -->
-      <!-- <h1 class="main-heading">Alert & Notiication Report</h1>
-      <button class="add-alert-btn">ADD ALERT</button>
-
-
-      <div class="filter-group">
-        <div class="filter-item">
-          <label for="dateRange">Date Range</label>
-          <mat-form-field class="date-range">
-            <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
-            <input matInput [matDatepicker]="dateRangePicker" placeholder="Start Date" [(ngModel)]="startDate">
-            <mat-datepicker #dateRangePicker startView="multi-year" selectionMode="range"></mat-datepicker>
-            <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
-            <input matInput [matDatepicker]="dateRangePicker" placeholder="End Date" [(ngModel)]="startDate">
-            <mat-datepicker #dateRangePicker startView="multi-year" selectionMode="range"></mat-datepicker>
-          </mat-form-field>
-        </div>
-  
-        <div class="wrap">
-        <label for="date-range">Date Range</label>
-          <input type="date" placeholder="Start Date" [(ngModel)]="startDate" />
-          <input type="date" placeholder="End Date" [(ngModel)]="endDate" />
-        </div>
-        
-      </div>
-
-      <div class="filter-group"> 
-        <div class="wrap">
-          <label for="alert-type">Alert Type</label>
-        <select id="alert-type" [(ngModel)]="selectedAlertType">
-          <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
-        </select>
-        </div>
-        
-      </div>
-
-      <div class="filter-group"> 
-        <div class="wrap">
-          <label for="alert-type">Export Type</label>
-        <select id="alert-type" [(ngModel)]="selectedExportType">
-          <option *ngFor="let type of exportTypes" [value]="type">{{ type }}</option>
-        </select>
-        </div>
       </div> -->
-
-    <!-- </div> -->
-  
-  <div class="table-container">
-    <table>
+         
+       
+  <div id="table-container" class="table-container">
+    <table id="alertTable">
         <thead>
           <tr>
             <th>S.No</th>
@@ -92,28 +48,28 @@
             <th>Is Read</th>
             <th>Priority Level</th>
             <th>Expires At</th>
-            <th>Action</th>
+            <th class="no-print">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let alert of alerts; index as i">
             <td>{{ i + 1 }}</td>
-            <td>{{ alert.type }}</td>
-            <td>{{ alert.message }}</td>
+            <td>{{ alert.alertType }}</td>
+            <td>{{ alert.alertMessage }}</td>
             <td>{{ alert.employeeName }}</td>
             <td>{{ alert.isRead}}</td>
             <td>{{ alert.priorityLevel }}</td>
             <td>{{ alert.expireAt }}</td>
-            <td>
+            <td class="no-print">
               <div class="button-wrapper">
-                <button (click)="onView(alert)" mat-icon-button color="primary" class="btn-view">
+                <button (click)="openCreateFormModal(addAlertFormModal, 'view', alert)" mat-icon-button color="primary" class="btn-view">
                   <mat-icon>visibility</mat-icon>
                 </button>
                 <span class="button-text-view">View</span>
               </div>
   
               <div class="button-wrapper">
-                <button (click)="onEdit(alert)" mat-icon-button color="accent" class="btn-edit">
+                <button (click)="openCreateFormModal(addAlertFormModal, 'edit', alert)"mat-icon-button color="accent" class="btn-edit">
                   <mat-icon>edit</mat-icon>
                 </button>
                 <span class="button-text-edit">Edit</span>
@@ -132,3 +88,127 @@
   </div>
 </div>
   
+<div *ngIf="isModalOpen" class="overlay"></div>
+<ng-template #addAlertFormModal>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="addAlertForm"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateAlert() : addAlert()"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Alert' : isEditMode ? 'Edit Alert' : 'Add Alert' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Row 1 (Alert Type, Alert Messsge) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="alertType">Alert Type</label>
+              <select formControlName="alertType" id="alertType" class="form-control"
+              [disabled]="isViewMode"
+              name="alertType"  required>
+                <option value="" disabled selected>Select Type</option>
+                <option *ngFor="let type of alertTypes" [value]="type">{{ type }}</option>
+              </select>
+              
+            </div>
+            <div class="col-md-6">
+              <label for="alertMessage">Alert Message</label>
+              <select formControlName="alertMessage" id="alertMessage" class="form-control"
+              [disabled]="isViewMode"
+              name="alertMessage"  required>
+                <option value="" disabled selected>Select Type</option>
+                <option *ngFor="let message of alertMessages" [value]="message">{{ message }}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 2 (Employee Name, End Date) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="employeeName">Employee Name</label>
+              <input
+              type="text"
+              formControlName="employeeName"
+              id="employeeName"
+              class="form-control"
+              placeholder="Enter Employee Name"
+              [readonly]="isViewMode"
+            />
+            </div>
+            <div class="col-md-6">
+              <label for="isRead">Is Read?</label>
+              <select
+              formControlName="isRead"  id="isRead" 
+              class="form-control"
+              name="isRead"  required>
+                <option value="" disabled selected>Select</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+       
+
+         <!-- Row  (Priority Level, Expires At) -->
+         <div class="row">
+          <div class="col-md-4">
+            <label for="priorityLevel">Priority Level</label>
+            <select formControlName="priorityLevel" id="priorityLevel" class="form-control"
+            [disabled]="isViewMode"
+            name="priorityLevel"  required>
+              <option value="" disabled selected>Select Type</option>
+              <option *ngFor="let priority of priorityLevels" [value]="priority">{{ priority }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="expiresAt">Expires At</label>
+            <input
+              type="datetime-local"
+              formControlName="expiresAt"
+              id="expiresAt"
+              name="expiresAt"
+              class="form-control"
+              [readonly]="isViewMode"
+              
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="closeCreateFormModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Alert' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+

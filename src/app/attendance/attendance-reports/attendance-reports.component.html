@@ -1,213 +1,238 @@
 <div class="content-wrapper">
-    <div class="header-and-filters">
-      <h1 class="main-heading">Attendence Report</h1>
-      </div>
-  
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Employee Name</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Check In </th>
-            <th>Checkout</th>
-            <th>Work Hours</th>
-            <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let employee of employees; index as i">
-            <td>{{ employee.date}}</td>
-            <td>{{ employee.employee_name }}</td>
-            <td>{{ employee.role}}</td>
-            <td>{{ employee.status}}</td>
-            <td>{{ employee.check_in}}</td>
-            <td>{{ employee.check_out}}</td>
-            <td>{{ employee.work_hours}}</td>
-            
+  <div class="header-and-filters">
+    <h1 class="main-heading">Attendence Report</h1>
+    <button class="add-asset-btn" (click)="openCreateFormModal(AttedenceReportForm, 'add')">
+      Add Attendence
+    </button>
 
-            
-            <td>
-              <div class="button-wrapper">
-                <button
-                  (click)="openCreateFormModal(AttedenceReportForm, 'view', employee)"
-                  mat-icon-button
-                  color="primary"
-                  class="btn-view"
-                >
-                  <mat-icon>visibility</mat-icon>
-                </button>
-                <span class="button-text-view">View</span>
-              </div>
-  
-              <div class="button-wrapper">
-                <button
-                  (click)="openCreateFormModal(AttedenceReportForm, 'edit', employee)"
-                  mat-icon-button
-                  color="accent"
-                  class="btn-edit"
-                >
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <span class="button-text-edit">Edit</span>
-              </div>
-  
-              <div class="button-wrapper">
-                <button
-                  (click)="onDelete(employee)"
-                  mat-icon-button
-                  color="warn"
-                  class="btn-delete"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-                <span class="button-text-delete">Delete</span>
-              </div>
-            </td>
+    <div class="export-section">
+      <label for="export-type">Export</label>
+      <select id="export-type" (change)="onExport($event)">
+        <option value="" disabled selected>Select Type</option>
+        <option value="excel">Excel file</option>
+        <option value="pdf">PDF file</option>
+        <option value="print">Print</option>
+      </select>
+    </div>
+    </div>
+
+  <div id ="table-container"
+  class="table-container">
+    <table id="attendanceTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Employee Name</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Check In </th>
+          <th>Checkout</th>
+          <th>Work Hours</th>
+          <th class="no-print">Action</th>
           </tr>
-        </tbody>
-      </table>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; index as i">
+          <td>{{ employee.date}}</td>
+          <td>{{ employee.employee_name }}</td>
+          <td>{{ employee.role}}</td>
+          <td>{{ employee.status}}</td>
+          <td>{{ employee.check_in}}</td>
+          <td>{{ employee.check_out}}</td>
+          <td>{{ employee.work_hours}}</td>
+          <td class="no-print">
+          
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AttedenceReportForm, 'view', employee)"
+                mat-icon-button
+                color="primary"
+                class="btn-view"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <span class="button-text-view">View</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="openCreateFormModal(AttedenceReportForm, 'edit', employee)"
+                mat-icon-button
+                color="accent"
+                class="btn-edit"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <span class="button-text-edit">Edit</span>
+            </div>
+
+            <div class="button-wrapper">
+              <button
+                (click)="onDelete(employee)"
+                mat-icon-button
+                color="warn"
+                class="btn-delete"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <span class="button-text-delete">Delete</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" class="overlay"></div>
+<ng-template #AttedenceReportForm>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="attendenceReportForm"
+        novalidate
+        autocomplete="off"
+        (ngSubmit)="isEditMode ? updateBenefit() : addBenefit()"
+      >
+        <div class="modal-header">
+          <h4 class="modal-title">
+            {{ isViewMode ? 'View Attendence' : isEditMode ? 'Edit Attendence' : 'Add Attendence' }}
+          </h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="closeCreateFormModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Row 1 (Employee Name, Employee Type) -->
+          <div class="row">
+             <div class="col-md-6">
+              <label for="employee_name">Employee Name</label>
+              <input
+                type="text"
+                formControlName="employee_name"
+                id="employee_name"
+                class="form-control"
+                placeholder="Enter Employee Name"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="date">Date</label>
+              <input
+                type="text"
+                formControlName="date"
+                id="date"
+                class="form-control"
+                placeholder="Enter Date"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+           <!-- Row 2 (Check In, Check Out) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="check_in">Check In</label>
+              <input
+                type="text"
+                formControlName="check_in"
+                id="check_in"
+                class="form-control"
+                placeholder="Enter Check In Time"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="check_out">Check Out</label>
+              <input
+                type="text"
+                formControlName="check_out"
+                id="check_out"
+                class="form-control"
+                placeholder="Enter Check Out Time"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+          <!-- Row 3 (Role, Status) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="role">Role</label>
+              <input
+                type="text"
+                formControlName="role"
+                id="role"
+                class="form-control"
+                placeholder="Enter Employee Role"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="status">Status</label>
+              <input
+                type="text"
+                formControlName="status"
+                id="status"
+                class="form-control"
+                placeholder="Enter Status"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+
+         
+         
+
+          <!-- Row 4 (Work Hours) -->
+          <div class="row">
+            <div class="col-md-6">
+              <label for="work_hours">Work Hours</label>
+              <input
+                type="text"
+                formControlName="work_hours"
+                id="work_hours"
+                class="form-control"
+                placeholder="Enter Work Hours"
+                [readonly]="isViewMode"
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="remarks">Remarks</label>
+              <input
+                type="text"
+                formControlName="remarks"
+                id="remarks"
+                class="form-control"
+                placeholder="Enter remarks"
+                [readonly]="isViewMode"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="closeCreateFormModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="btn btn-success"
+            *ngIf="!isViewMode"
+          >
+            {{ isEditMode ? 'Save Changes' : 'Add Attendence' }}
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-  
-  <ng-template #AttedenceReportForm>
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <form
-          [formGroup]="attendenceReportForm"
-          novalidate
-          autocomplete="off"
-          (ngSubmit)="isEditMode ? updateBenefit() : addBenefit()"
-        >
-          <div class="modal-header">
-            <h4 class="modal-title">
-              {{ isViewMode ? 'View Attendence' : isEditMode ? 'Edit Attendence' : 'Add Employee' }}
-            </h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              (click)="closeCreateFormModal()"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-  
-          <div class="modal-body">
-            <!-- Row 1 (Employee Name, Employee Type) -->
-            <div class="row">
-              <div class="col-md-6">
-                <label for="date">Date</label>
-                <input
-                  type="text"
-                  formControlName="date"
-                  id="date"
-                  class="form-control"
-                  placeholder="Enter Employee Name"
-                  [readonly]="isViewMode"
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="employee_name">Employee Name</label>
-                <input
-                  type="text"
-                  formControlName="employee_name"
-                  id="employee_name"
-                  class="form-control"
-                  placeholder="Enter Employee Name"
-                  [readonly]="isViewMode"
-                />
-              </div>
-            </div>
-  
-            <!-- Row 2 (Role, Status) -->
-            <div class="row">
-              <div class="col-md-6">
-                <label for="role">Role</label>
-                <input
-                  type="text"
-                  formControlName="role"
-                  id="role"
-                  class="form-control"
-                  placeholder="Enter Employee Role"
-                  [readonly]="isViewMode"
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="status">Status</label>
-                <input
-                  type="text"
-                  formControlName="status"
-                  id="status"
-                  class="form-control"
-                  placeholder="Enter Status"
-                  [readonly]="isViewMode"
-                />
-              </div>
-            </div>
-  
-            <!-- Row 3 (Check In, Check Out) -->
-            <div class="row">
-              <div class="col-md-6">
-                <label for="check_in">Check In</label>
-                <input
-                  type="text"
-                  formControlName="check_in"
-                  id="check_in"
-                  class="form-control"
-                  placeholder="Enter Check In"
-                  [readonly]="isViewMode"
-                />
-              </div>
-              <div class="col-md-6">
-                <label for="check_out">Check Out</label>
-                <input
-                  type="text"
-                  formControlName="check_out"
-                  id="check_out"
-                  class="form-control"
-                  placeholder="Enter Check Out"
-                  [readonly]="isViewMode"
-                />
-              </div>
-            </div>
-  
-            <!-- Row 4 (Work Hours) -->
-            <div class="row">
-              <div class="col-md-6">
-                <label for="work_hours">Work Hours</label>
-                <input
-                  type="text"
-                  formControlName="work_hours"
-                  id="work_hours"
-                  class="form-control"
-                  placeholder="Enter Work Hours"
-                  [readonly]="isViewMode"
-                />
-              </div>
-            </div>
-          </div>
-  
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              (click)="closeCreateFormModal()"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="btn btn-success"
-              *ngIf="!isViewMode"
-            >
-              {{ isEditMode ? 'Save Changes' : 'Add Employee' }}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </ng-template>
-  
+</ng-template>

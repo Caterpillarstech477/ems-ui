@@ -55,6 +55,7 @@
     </div>
 </div>
   
+<div *ngIf="isModalOpen" class="overlay"></div>
 <ng-template #AddHolidayForm>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -99,6 +100,7 @@
                   class="form-control"
                   [disabled]="isViewMode"
                 >
+                <option value="" disabled selected>Select Type</option>
                   <option value="">Public</option>
                   <option value="">Company</option>
                   <option value="">Others</option>
@@ -125,7 +127,7 @@
                 id="region"
                 class="form-control"
                 [disabled]="isViewMode"
-              >
+              ><option value="" disabled selected>Select Type</option>
                 <option value="8">8</option>
                 <option value="9">9</option>
                 <option value="10">10</option>
@@ -155,6 +157,7 @@
               <label for="is_recurring">Is Recurring</label>
               <select formControlName="is_recurring" id="is_recurring"
                 class="form-control" [disabled]="isViewMode" >
+                <option value="" disabled selected>Select Type</option>
                 <option value="">Yes</option>
                 <option value="">No</option>
                 <option value="">others</option>
