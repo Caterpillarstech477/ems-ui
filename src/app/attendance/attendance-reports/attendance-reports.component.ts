@@ -3,6 +3,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+import { Attendance } from './model/attendance.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-attendance-reports',
@@ -11,50 +13,32 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class AttendanceReportsComponent {
 
-  employees = [
-    {
-      date:'2024-12-16',
-      employee_name: 'Gayathri',
-      role:'Design',
-      status:'Present',
-      check_in:'09:00 AM',
-      check_out:'6.00PM',
-      work_hours:'9 Hours',
-      remarks:'Checkout time early'
-    },
-    {
-      date:'2024-12-16',
-      employee_name: 'Venkatesh',
-      role:'Manager',
-      status:'Present',
-      check_in:'09:00 AM',
-      check_out:'6.00PM',
-      work_hours:'9 Hours',
-      remarks:'Login time is late'
-    }
-  ];
+  private ATTENDANCE_REST_API_URL = 'http://localhost:8080/api/attendance';  // URL to REST api
+  attendanceReports: Attendance[] = []; // Array of Attendance objects
 
   modalRef: BsModalRef | null = null;
   attendenceReportForm!: FormGroup;
   isViewMode = false;
   isEditMode = false;
-  selectedBenefit: any = null;
+  selectedAttendance: any = null;
   config = {
     backdrop: true,
     ignoreBackdropClick: true,
     class: 'modal-md'
   };
 
-  constructor(private modalService: BsModalService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {}
+  constructor(private modalService: BsModalService, private fb: FormBuilder, private cdr: ChangeDetectorRef,
+    private http: HttpClient) {}
 
   ngOnInit() {
-    this.initBenefitForm();
+    this.initattendanceForm();
   }
 
-  initBenefitForm() {
+  initattendanceForm() {
     this.attendenceReportForm = this.fb.group({
-      date: [''],
-      employee_name: [''],
+      attendanceDate: [''],
+      email: [''],
+      employeeId: [''],
       role: [''],
       status: [''],
       check_in: [''],
@@ -68,14 +52,14 @@ export class AttendanceReportsComponent {
     return this.attendenceReportForm.controls;
   }
 
-  openCreateFormModal(template: TemplateRef<any>, type: string = '', benefit: any = null) {
+  openCreateFormModal(template: TemplateRef<any>, type: string = '', attendance: any = null) {
     this.modalRef = this.modalService.show(template, this.config);
     this.isViewMode = type === 'view';
     this.isEditMode = type === 'edit';
-    this.selectedBenefit = benefit;
+    this.selectedAttendance = attendance;
 
-    if (benefit) {
-      this.attendenceReportForm.patchValue(benefit);
+    if (attendance) {
+      this.attendenceReportForm.patchValue(attendance);
     } else {
       this.attendenceReportForm.reset();
     }
@@ -94,31 +78,43 @@ export class AttendanceReportsComponent {
     }
     this.isViewMode = false;
     this.isEditMode = false;
-    this.selectedBenefit = null;
+    this.selectedAttendance = null;
     this.cdr.detectChanges();
   }
 
-  addBenefit() {
-    this.employees.push(this.attendenceReportForm.value);
+  makeAttendance() {
+
+    const attendance: Attendance = this.attendenceReportForm.value as Attendance;
+    console.log('Form Submitted and converted into attendance object', attendance);
+    //TODO : have to get it from logged in user, or 
+    // has to provide via search box where user can select employeeName and we will pass corresponding employeeId to backend
+    // ask user to mention his email address and that we will take it TO backend , then get the corresponding employeeId ,
+    // use the same while saving into attendance table
+    //attendance.employeeId = "1";
+    this.http.post<Attendance>(this.ATTENDANCE_REST_API_URL+"/add",attendance)
+    .subscribe(response => {
+          console.log('Attendance saved successfully', response);
+          this.attendanceReports.push(response);
+    });
     this.closeCreateFormModal();
   }
 
-  updateBenefit() {
-    if (this.selectedBenefit) {
-      const index = this.employees.findIndex(
-        b => b.employee_name === this.selectedBenefit.employee_name && b.employee_name === this.selectedBenefit.employee_name
+  updateAttendance() {
+    if (this.selectedAttendance) {
+      const index = this.attendanceReports.findIndex(
+        b => b.employeeId === this.selectedAttendance.employeeId && b.employeeId === this.selectedAttendance.employeeId
       );
       if (index > -1) {
-        this.employees[index] = this.attendenceReportForm.value;
+        this.attendanceReports[index] = this.attendenceReportForm.value;
         this.closeCreateFormModal();
       }
     }
   }
 
-  onDelete(benefit: any) {
-    const confirmDelete = confirm(`Are you sure you want to delete ${benefit.employee_name}'s record?`);
+  onDelete(attendance: any) {
+    const confirmDelete = confirm(`Are you sure you want to delete ${attendance.employeeId}'s record?`);
     if (confirmDelete) {
-      this.employees = this.employees.filter(b => b.employee_name !== benefit.employee_name);
+      this.attendanceReports = this.attendanceReports.filter(b => b.employeeId !== attendance.employeeId);
     }
   }
 
@@ -128,7 +124,7 @@ export class AttendanceReportsComponent {
   }
 
   filterAttendanceByDate(date: string) {
-    this.employees = this.employees.filter(employee => employee.date === date);
+    this.attendanceReports = this.attendanceReports.filter(attendanceReport => attendanceReport.attendanceDate === date);
   }
 
   exportAttendanceReport(event: any) {
