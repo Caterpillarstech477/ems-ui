@@ -330,23 +330,10 @@
               <a href="javascript:void(0);" (click)="showTermsAndPolicies()">Please Review terms and policies</a>
             </div>
           </div>
-          
-          <!-- Terms and Policies content inside the modal (Initially hidden) -->
           <div *ngIf="termsVisible" class="terms-content">
-            <h5>Terms and Policies</h5>
             <p>
-              Here, you can add the content of your terms and policies. You can style it however you prefer.
+               <span><input type="checkbox" [(ngModel)]="isAgreed" /></span>By submitting this information, you explicitly consent to the collection, storage, and processing of your personal data solely for employment-related purposes, in compliance with our company policies and applicable data protection laws, including GDPR. Your data will be securely handled and will not be shared without your explicit consent unless required by law.
             </p>
-            <p>
-              Additional terms and conditions...
-            </p>
-          
-            <!-- Checkbox to agree to terms and conditions -->
-            <div>
-              <label>
-                <input type="checkbox" [(ngModel)]="isAgreed" /> I agree to the terms and policies
-              </label>
-            </div>
           </div>
           
         </div>

@@ -98,7 +98,7 @@ export class HolidayListComponent {
              this.holidays.push(response);
         });
 
-        this.holidays.push(holiday);
+        //this.holidays.push(holiday);
           //console.log('this.employees', this.employees);
           this.closeCreateFormModal();
         // }
