@@ -26,8 +26,8 @@
             <td>{{ attendanceReport.employeeId }}</td>
             <td>{{ attendanceReport.role}}</td>
             <td>{{ attendanceReport.status}}</td>
-            <td>{{ attendanceReport.check_in}}</td>
-            <td>{{ attendanceReport.check_out}}</td>
+            <td>{{ attendanceReport.inTime}}</td>
+            <td>{{ attendanceReport.outTime}}</td>
             <td>{{ attendanceReport.work_hours}}</td>
             <td>
               <div class="button-wrapper">
@@ -98,18 +98,6 @@
           <div class="modal-body">
             <!-- Row 1 (attendanceReport Name, attendanceReport Type) -->
             <div class="row">
-               <div class="col-md-6">
-                
-                  <label for="email">email</label>
-                  <input
-                    type="text"
-                    formControlName="email"
-                    id="email"
-                    class="form-control"
-                    placeholder="Enter Employee Email"
-                    [readonly]="isViewMode"
-                  />
-                </div>
         
             <!-- </div> -->
             
@@ -128,22 +116,22 @@
              <!-- Row 2 (Check In, Check Out) -->
             <div class="row">
               <div class="col-md-6">
-                <label for="check_in">Check In</label>
+                <label for="inTime">Check In</label>
                 <input
                   type="text"
-                  formControlName="check_in"
-                  id="check_in"
+                  formControlName="inTime"
+                  id="inTime"
                   class="form-control"
                   placeholder="Enter Check In Time"
                   [readonly]="isViewMode"
                 />
               </div>
               <div class="col-md-6">
-                <label for="check_out">Check Out</label>
+                <label for="outTime">Check Out</label>
                 <input
                   type="text"
-                  formControlName="check_out"
-                  id="check_out"
+                  formControlName="outTime"
+                  id="outTime"
                   class="form-control"
                   placeholder="Enter Check Out Time"
                   [readonly]="isViewMode"

@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { Attendance } from './model/attendance.model';
 import { HttpClient } from '@angular/common/http';
+import { ApiResponse } from './../../util/ApiResponse.model';
+
 
 @Component({
   selector: 'app-attendance-reports',
@@ -37,12 +39,11 @@ export class AttendanceReportsComponent {
   initattendanceForm() {
     this.attendenceReportForm = this.fb.group({
       attendanceDate: [''],
-      email: [''],
       employeeId: [''],
       role: [''],
       status: [''],
-      check_in: [''],
-      check_out: [''],
+      inTime: [''],
+      outTime: [''],
       work_hours: [''],
       remarks:['']
     });
@@ -90,11 +91,20 @@ export class AttendanceReportsComponent {
     // has to provide via search box where user can select employeeName and we will pass corresponding employeeId to backend
     // ask user to mention his email address and that we will take it TO backend , then get the corresponding employeeId ,
     // use the same while saving into attendance table
-    //attendance.employeeId = "1";
-    this.http.post<Attendance>(this.ATTENDANCE_REST_API_URL+"/add",attendance)
+    attendance.employeeId = "4";
+    /*
+    {
+    "employeeId": 3,
+    "attendanceDate" : "1993-06-12",
+    "inTime" : "2025-01-12 10:00:00.000",
+    "outTime" : "2025-01-12 18:00:00.000"
+   
+}*/
+//const response: ApiResponse<Attendance>;
+    this.http.post<ApiResponse<Attendance>>(this.ATTENDANCE_REST_API_URL+"/add", attendance)
     .subscribe(response => {
           console.log('Attendance saved successfully', response);
-          this.attendanceReports.push(response);
+          this.attendanceReports.push(response.data);
     });
     this.closeCreateFormModal();
   }
