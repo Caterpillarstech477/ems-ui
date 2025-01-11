@@ -95,7 +95,13 @@ export class AttendanceReportsComponent {
     this.http.post<ApiResponse<Attendance>>(this.ATTENDANCE_REST_API_URL+"/add", attendance)
     .subscribe(response => {
           console.log('Attendance saved successfully', response);
-          this.attendanceReports.push(response.data);
+          if(response.statusCode == 200) {
+            this.attendanceReports.push(response.data);
+          } else {
+            //TODO : bootsstrap alert or notification or popup for the user
+            console.error("Error occured while making the attaendace. please check logs");
+            console.error(response);
+          }
     });
     this.closeCreateFormModal();
   }
