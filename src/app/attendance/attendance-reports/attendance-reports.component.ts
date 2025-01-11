@@ -92,15 +92,6 @@ export class AttendanceReportsComponent {
     // ask user to mention his email address and that we will take it TO backend , then get the corresponding employeeId ,
     // use the same while saving into attendance table
     attendance.employeeId = "4";
-    /*
-    {
-    "employeeId": 3,
-    "attendanceDate" : "1993-06-12",
-    "inTime" : "2025-01-12 10:00:00.000",
-    "outTime" : "2025-01-12 18:00:00.000"
-   
-}*/
-//const response: ApiResponse<Attendance>;
     this.http.post<ApiResponse<Attendance>>(this.ATTENDANCE_REST_API_URL+"/add", attendance)
     .subscribe(response => {
           console.log('Attendance saved successfully', response);
